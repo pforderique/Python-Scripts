@@ -1,6 +1,5 @@
 #Welcome to the test.py script. This is to make sure I can run very basic stuff before I go on to take the class
 #TODO
-    #Before moving notebook folder in to this folder, watch how to video on making this into a GIT repo
     #add notebooks folder here and push to master. 
     #learn how to fork and edit and all that good stuff with the tutorial and using this test.py script
 
@@ -9,4 +8,4 @@ print("This is a test project")
 
 def myFunc(a):
     return a+2
-print(myFunc(6))
+print(myFunc(6))    
