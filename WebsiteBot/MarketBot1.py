@@ -15,5 +15,5 @@ soup = BeautifulSoup(content, features="html.parser") #we are parsing with html 
 
 #get the price of one share of AMZN
 #value = soup.find('bg_quote',attrs={'class':"IsqQVc NprOob"})
-value = soup.find_element_by_xpath("""<a class="tv-screener__symbol apply-common-tooltip" href="https://www.tradingview.com/symbols/NASDAQ-MSFT/">MSFT</a>""")
+value = driver.find_element_by_xpath("""//*[@id="js-screener-container"]/div[4]/table/tbody/tr[1]/td[1]/div/div[2]/a""").click()
 print(value.text)
