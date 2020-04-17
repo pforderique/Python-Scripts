@@ -7,8 +7,8 @@ from bs4 import BeautifulSoup
 import pandas as pd #I'll use this to store information
 
 #To configure webdriver to use Chrome browser, we have to set the path to chromedriver
-    #PATH to installed driver: "C:\\\\Users\\\\fabri\\\\miniconda3\\\\Lib\\\\site-packages\\\\selenium\\\\webdriver\\\\chrome\\\\chromedriver.exe"
-driver = webdriver.Chrome("C:\\\\Users\\\\fabri\\\\miniconda3\\\\Lib\\\\site-packages\\\\selenium\\\\webdriver\\\\chrome\\\\chromedriver.exe")
+    #PATH to installed driver: "C:\\Users\\fabri\\miniconda3\\Lib\\site-packages\\selenium\\webdriver\\chrome\\chromedriver.exe"
+driver = webdriver.Chrome("C:\\Users\\fabri\\miniconda3\\Lib\\site-packages\\selenium\\webdriver\\chrome\\chromedriver.exe")
 
 ###################################################################################################
 ### FLIPKART BRANCH INCLUDES THE EXAMPLE OF EXTRACTING MULTIPLE INFO FROM THE FLIPKART WEBSITE  ###
