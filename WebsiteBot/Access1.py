@@ -21,6 +21,11 @@ driver.get("https://www.flipkart.com/laptops/~buyback-guarantee-on-laptops-/pr?s
 content = driver.page_source
 soup = BeautifulSoup(content, features="html.parser") #we are parsing with html parser
 
+#get the price of one share of AMZN:
+#value = soup.find('bg_quote',attrs={'class':"IsqQVc NprOob"})
+#value = driver.find_element_by_xpath("""//*[@id="js-screener-container"]/div[4]/table/tbody/tr[1]/td[1]/div/div[2]/a""") #.click()
+#print(value.text)
+
 #This parent class is nested in <a> tag, which holds the <div> in which the other attributes are in.
 #Therfore, maybe look for <a> and it will also have an href link maybe?
 for a in soup.findAll('a',href=True, attrs={'class':'_31qSD5'}):    
