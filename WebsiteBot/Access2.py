@@ -7,8 +7,8 @@ from bs4 import BeautifulSoup
 import pandas as pd #I'll use this to store information
 
 #To configure webdriver to use Chrome browser, we have to set the path to chromedriver
-    #PATH to installed driver: "C:\\Users\\fabri\\miniconda3\\Lib\\site-packages\\selenium\\webdriver\\chrome\\chromedriver.exe"
-driver = webdriver.Chrome("C:\\Users\\fabri\\miniconda3\\Lib\\site-packages\\selenium\\webdriver\\chrome\\chromedriver.exe")
+    #PATH to installed driver: "C:\\\\Users\\\\fabri\\\\miniconda3\\\\Lib\\\\site-packages\\\\selenium\\\\webdriver\\\\chrome\\\\chromedriver.exe"
+driver = webdriver.Chrome("C:\\\\Users\\\\fabri\\\\miniconda3\\\\Lib\\\\site-packages\\\\selenium\\\\webdriver\\\\chrome\\\\chromedriver.exe")
 
 ###################################################################################################
 ### FLIPKART BRANCH INCLUDES THE EXAMPLE OF EXTRACTING MULTIPLE INFO FROM THE FLIPKART WEBSITE  ###
@@ -32,3 +32,9 @@ for a in soup.findAll('a',href=True, attrs={'class':'_31qSD5'}):
     products.append(name.text)
     prices.append(price.text)
     ratings.append(rating.text)
+
+#store info in a data frame and save as csv!
+df = pd.DataFrame({'Product Name':products,
+                   'Price':prices,
+                   'Rating':ratings})
+df.to_csv("C:\\Users\\fabri\\OneDrive\\Documents\\DasText\\csvFiles\\products.csv", index=False, encoding='utf-8')
