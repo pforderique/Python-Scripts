@@ -1,7 +1,8 @@
 ############################################################################################
 ## MARKETBOT1 gives the 100 ticker symbols and prices of stocks listed on tradingview.com 
 ##
-## Edition 1.0 
+## Edition 1.1 - added name of stock as first column in df
+##
 ## @author Piero Orderique
 ############################################################################################
 
@@ -13,6 +14,7 @@ driver = webdriver.Chrome("C:\\Users\\fabri\\miniconda3\\Lib\\site-packages\\sel
 #website that market data will be extracted from 
 driver.get("https://www.tradingview.com/markets/stocks-usa/market-movers-large-cap/")
 
+names = driver.find_elements_by_class_name("tv-screener__description") 
 #I added a . where there were spaces and it worked!
 tickers = driver.find_elements_by_class_name("tv-screener__symbol.apply-common-tooltip") 
 #had to look at xpath for 2-3 examples and noticed that only thing different was the index in the first "tr[]"
@@ -25,14 +27,17 @@ for index, ticker in enumerate(tickers):
 #Makes the offical lists containing the text
 tickerList = []
 priceList = []
+nameList = []
 for ticker in tickers:
    tickerList.append(ticker.text)
 for price in prices:
    priceList.append(price.text)
+for name in names:
+    nameList.append(name.text)
 
 driver.close() #closes driver once done extracting data
 
 #let's put the market data into a pandas dataframe
-df = pd.DataFrame({'Ticker Symbol': tickerList,'Last Price': priceList})
+df = pd.DataFrame({'Company': nameList,'Ticker Symbol': tickerList,'Last Price': priceList})
 pd.set_option("display.max_rows", None, "display.max_columns", None)
 print(df)  #or can save to csv file 
