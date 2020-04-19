@@ -1,49 +1,49 @@
 ###################
 ## EXAMPLE: strings 
 ###################
-hi = "hello there"
-name = "ana"
-greet = hi + name  
-print(greet)
-greeting = hi + " " + name
-print(greeting)
-silly = hi + (" " + name)*3
-print(silly)
+# hi = "hello there"
+# name = "ana"
+# greet = hi + name  
+# print(greet)
+# greeting = hi + " " + name
+# print(greeting)
+# silly = hi + (" " + name)*3
+# print(silly)
 
-####################
-## EXAMPLE: output 
-####################
-x = 1
-print(x)
-x_str = str(x)
-print("my fav number is", x, ".", "x=", x)
-print("my fav number is", x_str + "." + "x=" + x_str)
-print("my fav number is" + x_str + "." + "x=" + x_str)
-
-
-####################
-## EXAMPLE: input
-####################
-text = input("Type anything... ")
-print(5*text)
-num = int(input("Type a number... "))
-print(5*num)
+# ####################
+# ## EXAMPLE: output 
+# ####################
+# x = 1
+# print(x)
+# x_str = str(x)
+# print("my fav number is", x, ".", "x=", x)
+# print("my fav number is", x_str + "." + "x=" + x_str)
+# print("my fav number is" + x_str + "." + "x=" + x_str)
 
 
-####################
-## EXAMPLE: conditionals/branching 
-####################
-x = float(input("Enter a number for x: "))
-y = float(input("Enter a number for y: "))
-if x == y:
-   print("x and y are equal")
-   if y != 0:
-       print("therefore, x / y is", x/y)
-elif x < y:
-   print("x is smaller")
-elif x > y:
-   print("y is smaller")
-print("thanks!")
+# ####################
+# ## EXAMPLE: input
+# ####################
+# text = input("Type anything... ")
+# print(5*text)
+# num = int(input("Type a number... "))
+# print(5*num)
+
+
+# ####################
+# ## EXAMPLE: conditionals/branching 
+# ####################
+# x = float(input("Enter a number for x: "))
+# y = float(input("Enter a number for y: "))
+# if x == y:
+#    print("x and y are equal")
+#    if y != 0:
+#        print("therefore, x / y is", x/y)
+# elif x < y:
+#    print("x is smaller")
+# elif x > y:
+#    print("y is smaller")
+# print("thanks!")
 
 
 
@@ -63,10 +63,17 @@ print("thanks!")
 ## twice and flip the table any more times than that. 
 ## Hint: use a counter
 ####################
-#n = input("You are in the Lost Forest\n****************\n****************\n :)\n****************\n****************\nGo left or right? ")
-#while n == "right" or n == "Right":
-#    n = input("You are in the Lost Forest\n****************\n******       ***\n  (╯°□°）╯︵ ┻━┻\n****************\n****************\nGo left or right? ")
-#print("\nYou got out of the Lost Forest!\n\o/")
+# n = input("You are in the Lost Forest\n****************\n****************\n :)\n****************\n****************\nGo left or right? ")
+# count = 0
+# while n == "right" or n == "Right":
+#    count+=1
+#    if count < 2:
+#       n = input("You are in the Lost Forest\n****************\n****************\n :)\n****************\n****************\nGo left or right? ")
+#    elif count == 2:
+#       n = input("You are in the Lost Forest\n****************\n****************\n :(\n****************\n****************\nGo left or right? ")
+#    else:
+#       n = input("You are in the Lost Forest\n****************\n******       ***\n  (╯°□°）╯︵ ┻━┻\n****************\n****************\nGo left or right? ")
+# print("\nYou got out of the Lost Forest!\n\o/")
 
 
 
@@ -101,23 +108,25 @@ print("thanks!")
 #print(mysum)
 
 
-
 ####################
 ## EXAMPLE: perfect squares
 ####################
-#ans = 0
-#neg_flag = False
-#x = int(input("Enter an integer: "))
-#if x < 0:
-#    neg_flag = True
-#while ans**2 < x:
-#    ans = ans + 1
-#if ans**2 == x:
-#    print("Square root of", x, "is", ans)
-#else:
-#    print(x, "is not a perfect square")
-#    if neg_flag:
-#        print("Just checking... did you mean", -x, "?")
+ans = 0
+neg_flag = False
+x = int(input("Enter an integer: "))
+if x < 0:
+   neg_flag = True
+while ans**2 < abs(x):
+   ans = ans + 1
+if ans**2 == abs(x):
+   if not neg_flag:
+      print("Square root of", x, "is", ans)
+   else:
+      print("Square root of %s is %si" % (x,ans))
+else:
+   print(x, "is not a perfect square")
+   if neg_flag:
+       print("Just checking... did you mean", -x, "?")
 
 
 ####################
