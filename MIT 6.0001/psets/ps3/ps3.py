@@ -145,6 +145,7 @@ def deal_hand(n):
     hand={}
     num_vowels = int(math.ceil(n / 3))-1
     hand["*"] = hand.get("*",0)+1
+
     for i in range(num_vowels):
         x = random.choice(VOWELS)
         hand[x] = hand.get(x, 0) + 1
@@ -152,7 +153,6 @@ def deal_hand(n):
     for i in range(num_vowels, n-1):    
         x = random.choice(CONSONANTS)
         hand[x] = hand.get(x, 0) + 1
-    
     return hand
 
 #
@@ -281,7 +281,7 @@ def play_hand(hand, word_list):
         # Display the hand
         display_hand(hand)
         # Ask user for input
-        word = input("Enter word, or \"!!\" to indicate that you are finished:")
+        word = input("Enter word, or \"!!\" to indicate that you are finished: ")
         # If the input is two exclamation points:
         if word == "!!":
             # End the game (break out of the loop)
@@ -289,11 +289,11 @@ def play_hand(hand, word_list):
         # Otherwise (the input is not two exclamation points):
         else:
             # If the word is valid:
-            if is_valid_word(word):
+            if is_valid_word(word,hand,word_list):
                 # Tell the user how many points the word earned,
                 # and the updated total score
-                roundScore = get_word_score(word,calculate_handlen(hand)
-                print(word,"earned",roundScore,end = ' '))
+                roundScore = get_word_score(word,calculate_handlen(hand))
+                print(word,"earned",roundScore,end = ' ')
                 totalScore += roundScore
                 print("Total",totalScore)
             # Otherwise (the word is not valid):
@@ -312,7 +312,6 @@ def play_hand(hand, word_list):
 #
 # Problem #6: Playing a game
 # 
-
 
 #
 # procedure you will use to substitute a letter in a hand
@@ -340,10 +339,19 @@ def substitute_hand(hand, letter):
     letter: string
     returns: dictionary (string -> int)
     """
-    
-    pass  # TO DO... Remove this line when you implement this function
-       
-    
+    hand_copy = hand.copy()
+    if letter not in hand:
+        return hand
+    else:
+        charChosen = list(hand.keys())[0]
+        chars = VOWELS+CONSONANTS
+        while charChosen in hand_copy:
+            charChosen = random.choice(chars)
+        num = hand_copy[letter]
+        del hand_copy[letter]
+        hand_copy[charChosen] = num
+    return hand_copy
+
 def play_game(word_list):
     """
     Allow the user to play a series of hands
@@ -374,10 +382,40 @@ def play_game(word_list):
 
     word_list: list of lowercase strings
     """
-    
-    print("play_game not implemented.") # TO DO... Remove this line when you implement this function
-    
-
+    print("\n<<<<<<<<<<<<<<GAME OF SCRABBLE>>>>>>>>>>>>>>>>")
+    print("-----------------------------------------------")
+    numOfHands = int(input("Input number of hands you want to play: "))
+    totalScore = 0
+    canSubstitute = True
+    canReplayHand = True
+    for i in range(numOfHands):
+        currentHand = deal_hand(HAND_SIZE)
+        print("-----------------------------------------------")
+        print("Hand #"+str(i+1)+". Your current hand is: ")
+        display_hand(currentHand)
+        if canSubstitute:
+            ans = input("Want to substitue a letter? (y/n) ")
+            if ans == "y":
+                c = input("Please select a letter: ")
+                currentHand = substitute_hand(currentHand,c)
+                canSubstitute = False
+        possScore = play_hand(currentHand,word_list)
+        if canReplayHand:
+            ans = input("Replay hand? (y/n) ")
+            if ans == 'y':
+                print("-----------------------------------------------")
+                print("Hand #"+str(i+1)+". Your current hand is: ")
+                display_hand(currentHand)
+                canReplayHand = False
+                if canSubstitute:
+                    ans = input("Want to substitue a letter? (y/n) ")
+                    if ans == "y":
+                        c = input("Please select a letter: ")
+                        currentHand = substitute_hand(currentHand,c)
+                        canSubstitute = False
+                possScore = play_hand(currentHand,word_list)
+        totalScore += possScore
+    return totalScore
 
 #
 # Build data structures used for entire session and play game
