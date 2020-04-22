@@ -3,8 +3,8 @@
 # The 6.0001 Word Game
 # Created by: Kevin Luu <luuk> and Jenna Wiens <jwiens>
 #
-# Name          : <your name>
-# Collaborators : <your collaborators>
+# Name          : Piero Orderique <porder>
+# Collaborators : <self>
 # Time spent    : <total time>
 
 import math
@@ -23,7 +23,7 @@ SCRABBLE_LETTER_VALUES = {
 # Helper code
 # (you don't need to understand this helper code)
 
-WORDLIST_FILENAME = "words.txt"
+WORDLIST_FILENAME = "C:\\Users\\fabri\\OneDrive\\Documents\\myPythonCodes\\MIT 6.0001\\psets\\ps3\\words.txt"
 
 def load_words():
     """
@@ -91,8 +91,17 @@ def get_word_score(word, n):
     n: int >= 0
     returns: int >= 0
     """
-    
-    pass  # TO DO... Remove this line when you implement this function
+    word = word.lower()
+    score = 0
+    #First component
+    for char in word:
+        if str.isalpha(char):
+            score += SCRABBLE_LETTER_VALUES[char]
+    #second component
+    poss = 7*len(word)-3*(n-len(word))
+    if poss > 1:
+        score*=poss
+    return score
 
 #
 # Make sure you understand how this function works and what it does!
@@ -134,13 +143,13 @@ def deal_hand(n):
     """
     
     hand={}
-    num_vowels = int(math.ceil(n / 3))
-
+    num_vowels = int(math.ceil(n / 3))-1
+    hand["*"] = hand.get("*",0)+1
     for i in range(num_vowels):
         x = random.choice(VOWELS)
         hand[x] = hand.get(x, 0) + 1
     
-    for i in range(num_vowels, n):    
+    for i in range(num_vowels, n-1):    
         x = random.choice(CONSONANTS)
         hand[x] = hand.get(x, 0) + 1
     
@@ -167,8 +176,17 @@ def update_hand(hand, word):
     hand: dictionary (string -> int)    
     returns: dictionary (string -> int)
     """
+    newHand = hand.copy()
+    word = word.lower()
+    for char in word:
+        if newHand.get(char) == None:
+            break
+        if newHand.get(char) < 1: #if char is NOT in the actual hand
+            break
+        else:
+            newHand[char] -= 1
 
-    pass  # TO DO... Remove this line when you implement this function
+    return newHand
 
 #
 # Problem #3: Test word validity
@@ -184,8 +202,29 @@ def is_valid_word(word, hand, word_list):
     word_list: list of lowercase strings
     returns: boolean
     """
-
-    pass  # TO DO... Remove this line when you implement this function
+    word = word.lower()
+    hand_copy = hand.copy()
+    madeOfHand = True
+    inList = False
+    #was it made using letters from the hand?
+    for char in word:
+        if hand_copy.get(char,0) < 1:
+            madeOfHand = False
+            break
+        else:
+            hand_copy[char] -= 1
+    #Did it include a wildcard?
+    wildIndex = word.find("*")
+    if wildIndex > -1:
+        for char in VOWELS:
+           fixedWord = word.replace("*",char)
+           if fixedWord in word_list or fixedWord.upper() in word_list:
+                inList = True
+                break
+        return madeOfHand and inList
+    else:
+        upperWord = word.upper()
+        return madeOfHand and (word in word_list or upperWord in word_list)
 
 #
 # Problem #5: Playing a hand
@@ -197,8 +236,10 @@ def calculate_handlen(hand):
     hand: dictionary (string-> int)
     returns: integer
     """
-    
-    pass  # TO DO... Remove this line when you implement this function
+    numOfLetters = 0
+    for index in hand:
+        numOfLetters += hand[index]
+    return numOfLetters
 
 def play_hand(hand, word_list):
 
@@ -233,37 +274,40 @@ def play_hand(hand, word_list):
     
     # BEGIN PSEUDOCODE <-- Remove this comment when you implement this function
     # Keep track of the total score
+    totalScore = 0
     
     # As long as there are still letters left in the hand:
-    
+    while calculate_handlen(hand) > 0:
         # Display the hand
-        
+        display_hand(hand)
         # Ask user for input
-        
+        word = input("Enter word, or \"!!\" to indicate that you are finished:")
         # If the input is two exclamation points:
-        
+        if word == "!!":
             # End the game (break out of the loop)
-
-            
+            break
         # Otherwise (the input is not two exclamation points):
-
+        else:
             # If the word is valid:
-
+            if is_valid_word(word):
                 # Tell the user how many points the word earned,
                 # and the updated total score
-
+                roundScore = get_word_score(word,calculate_handlen(hand)
+                print(word,"earned",roundScore,end = ' '))
+                totalScore += roundScore
+                print("Total",totalScore)
             # Otherwise (the word is not valid):
+            else:
                 # Reject invalid word (print a message)
-                
+                print("That is not a valid word. Please choose another word.")
             # update the user's hand by removing the letters of their inputted word
-            
+            hand = update_hand(hand, word)
 
     # Game is over (user entered '!!' or ran out of letters),
     # so tell user the total score
-
+    print("Game ended. Total score:",totalScore)
     # Return the total score as result of function
-
-
+    return totalScore
 
 #
 # Problem #6: Playing a game
