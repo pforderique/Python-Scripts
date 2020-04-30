@@ -1,6 +1,6 @@
 # Problem Set 4B
-# Name: <your name here>
-# Collaborators:
+# Name: Piero Orderique
+# Collaborators: None
 # Time Spent: x:xx
 
 import string
@@ -57,7 +57,7 @@ def get_story_string():
 
 ### END HELPER CODE ###
 
-WORDLIST_FILENAME = 'words.txt'
+WORDLIST_FILENAME = 'MIT 6.0001/psets/ps4/words.txt'
 
 class Message(object):
     def __init__(self, text):
@@ -70,7 +70,8 @@ class Message(object):
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)
         '''
-        pass #delete this line and replace with your code here
+        self.message_text = text
+        self.valid_words = load_words(WORDLIST_FILENAME)
 
     def get_message_text(self):
         '''
@@ -78,7 +79,7 @@ class Message(object):
         
         Returns: self.message_text
         '''
-        pass #delete this line and replace with your code here
+        return self.message_text
 
     def get_valid_words(self):
         '''
@@ -87,7 +88,8 @@ class Message(object):
         
         Returns: a COPY of self.valid_words
         '''
-        pass #delete this line and replace with your code here
+        copy = self.valid_words[:]
+        return copy
 
     def build_shift_dict(self, shift):
         '''
@@ -103,7 +105,18 @@ class Message(object):
         Returns: a dictionary mapping a letter (string) to 
                  another letter (string). 
         '''
-        pass #delete this line and replace with your code here
+        d = {}
+        for char in string.ascii_uppercase:
+            idx = string.ascii_uppercase.find(char)
+            newIdx = (idx + shift)%26
+            d[char] = string.ascii_uppercase[newIdx]
+
+        for char in string.ascii_lowercase:
+            idx = string.ascii_lowercase.find(char)
+            newIdx = (idx + shift)%26
+            d[char] = string.ascii_lowercase[newIdx]
+
+        return d
 
     def apply_shift(self, shift):
         '''
@@ -117,7 +130,12 @@ class Message(object):
         Returns: the message text (string) in which every character is shifted
              down the alphabet by the input shift
         '''
-        pass #delete this line and replace with your code here
+        encrypted_text = ""
+        d = self.build_shift_dict(shift)
+        for char in self.message_text:
+            encrypted_text += d[char]
+        return encrypted_text
+            
 
 class PlaintextMessage(Message):
     def __init__(self, text, shift):
@@ -173,7 +191,6 @@ class PlaintextMessage(Message):
         '''
         pass #delete this line and replace with your code here
 
-
 class CiphertextMessage(Message):
     def __init__(self, text):
         '''
@@ -222,3 +239,7 @@ if __name__ == '__main__':
     #TODO: best shift value and unencrypted story 
     
     pass #delete this line and replace with your code here
+
+m = Message("abcd")
+print(m.apply_shift(23))
+# print(m.build_shift_dict(23))
