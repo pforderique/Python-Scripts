@@ -2,9 +2,13 @@
 #TODO
     #add notebooks folder here and push to master. 
 
-import numpy as np #had to use conda install numpy - and conda install jupyter to open my previous notebooks
-print("This is a test project")
+# ==========================
+#     HOW TO TUTORIALS
+# ==========================
+'''
+>>> IMPORTING SCRIPTS FROM OUTSIDE DIRECTORY
+import sys
+sys.path.insert(1, 'C:/Users/fabri/OneDrive/Documents/myPythonCodes/RandomProjects/Searches and Sorts')
+import Searches as s 
+'''
 
-def myFunc(a):
-    return a+2
-print(myFunc(6))    
