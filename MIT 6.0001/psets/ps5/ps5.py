@@ -53,9 +53,23 @@ def process(url):
 #======================
 
 # Problem 1
-
-# TODO: NewsStory
-
+class NewsStory(object):
+    def __init__(self, guid, title, description, link, pubdate):
+        self.guid = guid
+        self.title = title
+        self.description = description
+        self.link = link
+        self.pubdate = pubdate
+    def get_guid(self):
+        return self.guid
+    def get_title(self):
+        return self.title
+    def get_description(self):
+        return self.description
+    def get_link(self):
+        return self.link
+    def get_pubdate(self):
+        return self.pubdate
 
 #======================
 # Triggers
@@ -73,18 +87,47 @@ class Trigger(object):
 # PHRASE TRIGGERS
 
 # Problem 2
-# TODO: PhraseTrigger
-
+class PhraseTrigger(Trigger):
+    def __init__(self, s):
+        self.phrase = s
+    def is_phrase_in(self, story):
+        keywords = self.phrase.lower.split()
+        story = story.lower
+        for word in keywords:
+            if story.find(word) < 0:
+                return False
+            elif story.find(word) == 0:
+                if story[len(word)] not in string.punctuation or story[len(word)] != " ":
+                    return False
+            elif story[story.find(word)+len(word)-1] == story[len(story)-1]:
+                if story[story.find(word)-1] not in string.punctuation or story[story.find(word)-1] != " ":
+                    return False
+            else: 
+                if story[story.find(word):len(word)+1] not in string.punctuation or story[story.find(word):len(word)+1] != " ":
+                    return False
+                if story[story.find(word)-1] not in string.punctuation or story[story.find(word)] != " ":
+                    return False
+        return True
+        
 # Problem 3
-# TODO: TitleTrigger
-
+class TitleTrigger(PhraseTrigger):
+    def __init__(self, s):
+        PhraseTrigger.__init__(self,s)
+    def is_phrase_in(self, newsObject):
+        return PhraseTrigger.is_phrase_in(self, newsObject.get_title() )
+    
 # Problem 4
-# TODO: DescriptionTrigger
+class DescriptionTrigger(PhraseTrigger):
+    def __init__(self, s):
+        PhraseTrigger.__init__(self,s)
+    def is_phrase_in(self, newsObject):
+        return PhraseTrigger.is_phrase_in(self, newsObject.get_description() )
 
 # TIME TRIGGERS
 
 # Problem 5
-# TODO: TimeTrigger
+# class TimeTrigger(object):
+#     def __init__(self, time)
 # Constructor:
 #        Input: Time has to be in EST and in the format of "%d %b %Y %H:%M:%S".
 #        Convert time from string to a datetime before saving it as an attribute.
