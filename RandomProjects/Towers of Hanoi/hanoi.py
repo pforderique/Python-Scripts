@@ -15,7 +15,6 @@ def hanoi(n,start,middle,end):
 
 if __name__ == "__main__":
     print('================= TOWERS OF HANOI ==================\n')
-    print('================= TOWERS OF HANOI:',i,'disks ==================')
     hanoi(3,1,2,3)
     print('Number of Steps:',counter)
     counter = 0
