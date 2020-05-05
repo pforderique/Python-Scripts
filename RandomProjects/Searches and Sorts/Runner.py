@@ -25,18 +25,22 @@ MASTER_LIST = [
     [23,52,66,3,42,63,45,27,43,23,5,57,3,2,3,2], #7                 16 UNsorted random
     [90,4,23,5,2,35,23,52,3,235,23,5,42,4,5,2,32,5,57,34,25,242,435,235,23,52,4,52,3,235,235,2] #8  32 UNsorted random
 ]
-LARGE_LIST_1 = LARGE_LIST[:]
-LARGE_LIST_2 = LARGE_LIST[:]
-LARGE_LIST_3 = LARGE_LIST[:]
+LARGE_LIST_1 = MEDIUM_LIST[:]
+LARGE_LIST_2 = MEDIUM_LIST[:]
+LARGE_LIST_3 = MEDIUM_LIST[:]
 
-ans = input('Ready to Start the Program? (y/n)')
+ans = input('\nReady to Start Bubble Sort? (y/n)')
 if ans == 'y':
-    # print('\n====================================BUBBLE SORT====================================\n')
-    # result = Sorts.bubbleSortTest(LARGE_LIST_1)
-    # print('FINAL SORTED LIST:\n',result)
+    print('\n====================================BUBBLE SORT====================================\n')
+    result = Sorts.bubbleSortTest(LARGE_LIST_1)
+    print('FINAL SORTED LIST:\n',result)
+ans = input('\nReady to Start Selection Sort? (y/n)')
+if ans == 'y':
     print('\n====================================SELECTION SORT====================================\n')
     result = Sorts.selectionSortTest(LARGE_LIST_2)
     print('FINAL SORTED LIST:\n',result)
+ans = input('\nReady to Start Merge Sort? (y/n)')
+if ans == 'y':
     print('\n====================================MERGE SORT====================================\n')
     result = Sorts.mergeSortTest(LARGE_LIST_3)
     print('FINAL SORTED LIST:\n',result)

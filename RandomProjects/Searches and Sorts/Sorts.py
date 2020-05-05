@@ -26,7 +26,7 @@ def bubbleSortTest(L):
                 swapped = True
                 L[idx-1],L[idx] = L[idx],L[idx-1]
                 swaps += 1
-                print('After',swaps,'swaps: '+str(L))
+                print('After',swaps,'swaps: \n'+str(L))
     print('Total Number of Comparisons:',comparisons)
     return L
 
@@ -106,4 +106,3 @@ def mergeSortTest(L):
         mid = len(L)//2
         print('merge comparisons',mergeComparisons)
         return merge(mergeSortTest(L[:mid]),mergeSortTest(L[mid:]))
-           
