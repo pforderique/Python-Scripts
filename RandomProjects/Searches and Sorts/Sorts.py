@@ -67,3 +67,43 @@ def selectionSortTest(L):
 # =============================
 #   MERGE SORT: Ascending
 # =============================
+mergeComparisons = 0
+def merge(L1,L2):
+    global mergeComparisons
+    # print('At',mergeComparisons,'comparisons:'+str(L1)+' '+str(L2))
+    result = []
+    while len(L1) > 0 and len(L2) > 0:
+        mergeComparisons += 1
+        if L1[0] < L2[0]:
+            result.append(L1[0])
+            del L1[0]
+        else:
+            result.append(L2[0])
+            del L2[0]
+    if len(L1) > 0:
+        result.extend(L1)
+        # print('     result:'+str(result))
+        return result
+    elif len(L2) > 0:
+        result.extend(L2)
+        # print('     result:'+str(result))
+        return result
+    else:
+        # print('     result:'+str(result))
+        return result
+
+def mergeSort(L):
+    if len(L) == 0 or len(L) == 1:
+        return L
+    else:
+        mid = len(L)//2
+        return merge(mergeSort(L[mid:]),mergeSort(L[:mid]))
+
+def mergeSortTest(L):
+    if len(L) == 0 or len(L) == 1:
+        return L
+    else:
+        mid = len(L)//2
+        print('merge comparisons',mergeComparisons)
+        return merge(mergeSortTest(L[:mid]),mergeSortTest(L[mid:]))
+           
