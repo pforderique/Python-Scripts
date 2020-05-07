@@ -53,15 +53,17 @@ def organizeDownloads():
             if file.find('.') > -1:
                 try:
                     shutil.move(DOWNLOADS_PATH+file,DOWNLOADS_PATH+DIRECTORIES['other'])   
-                    print(DOWNLOADS_PATH+file,'moved to',DOWNLOADS_PATH+DIRECTORIES['other'])
+                    print('Duplicate or Unidentifiable.',DOWNLOADS_PATH+file,'moved to',DOWNLOADS_PATH+DIRECTORIES['other'])
                 except:
                     print('Error Unknown')
             else:
-                print('Already a folder:',DOWNLOADS_PATH+file)
+                # print('Already a folder:',DOWNLOADS_PATH+file)
+                pass
 
 if __name__ == "__main__":
     while True:
         try:
+            print("Updating...")
             organizeDownloads()
             sleep(10)
         except KeyboardInterrupt:
