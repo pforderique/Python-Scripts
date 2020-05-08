@@ -6,6 +6,7 @@ DESCRIPTION:
     >>> images (jpg or png) in "Downloaded Images" folder
 
     @author Piero Orderique
+    @version 1.0
     @date 
 '''
 import os

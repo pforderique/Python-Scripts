@@ -14,5 +14,5 @@ def hanoi(n,start,middle,end):
 
 if __name__ == "__main__":
     print('================= TOWERS OF HANOI ==================\n')
-    hanoi(7,1,2,3)
+    hanoi(int(input('Input quantity of disks: ')),1,2,3)
     print('Number of Steps:',counter)
