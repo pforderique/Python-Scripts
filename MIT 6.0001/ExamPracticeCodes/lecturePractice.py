@@ -14,8 +14,8 @@ class A(object):
         print("A.z")
 class B(A):
     def __init__(self):
-        # A.__init__(self)
-        # self.a = 2
+        A.__init__(self)
+        self.a = 2
         self.b = 3
     def y(self):
         print("B.y")
@@ -39,5 +39,22 @@ class D(B, C):
 
 # obj = D()
 # obj.y()
-me = B()
-print(me.a)
+
+####GENERATORS
+def genTest():
+    yield 1
+    yield 2
+
+# foo = genTest()
+# print(foo.__next__())
+
+def genPrimes():
+    primes = [2]
+    yield primes[0]
+    guess = 3
+    while True:
+        if all(guess%x != 0 for x in primes):
+            primes.append(guess)        
+        if guess == primes[-1]:
+            yield primes[-1]
+        guess += 2
