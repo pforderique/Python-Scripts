@@ -107,9 +107,6 @@ def flatten(aList):
     '''
     L =[]
     print(type(aList))
-    # if type(aList) != list:
-    #     return aList
-    # else:
     for element in aList:
         if type(element) != list:
             L.append(element)
@@ -117,8 +114,6 @@ def flatten(aList):
             L.extend(flatten(element))
     return L
             
-        
-
-print(flatten([ [1,'a',['cat'],2 ] ,[ [[3]],'dog' ], 4, 5 ])) # prints [1,'a','cat',2,3,'dog',4,5]
+# print(flatten([ [1,'a',['cat'],2 ] ,[ [[3]],'dog' ], 4, 5 ])) # prints [1,'a','cat',2,3,'dog',4,5]
 
 # print(flatten([1,[2]])) #
