@@ -107,3 +107,49 @@ def longest_run(L):
 # L = [10, 4, 3, 8, 3, 4, 5, 7, 7, 2]
 # print(longest_run(L))
 
+class Person(object):     
+    def __init__(self, name):         
+        self.name = name     
+    def say(self, stuff):         
+        return self.name + ' says: ' + stuff     
+    def __str__(self):         
+        return self.name  
+
+class Lecturer(Person):     
+    def lecture(self, stuff):         
+        return 'I believe that ' + Person.say(self, stuff)  
+
+class Professor(Lecturer): 
+    def say(self, stuff): 
+        return 'Prof. '+self.name + ' says: ' + self.lecture(stuff)
+
+class ArrogantProfessor(Professor): 
+    def say(self, stuff): 
+        return self.name +' says: It is obvious that '+Lecturer.lecture(self, stuff)
+    def lecture(self, stuff):
+        return 'It is obvious that ' + Lecturer.lecture(self, stuff)
+
+e = Person('eric') 
+le = Lecturer('eric') 
+pe = Professor('eric') 
+ae = ArrogantProfessor('eric')
+print(pe.say('the sky is blue'))  #Prof. eric says: I believe that eric says: the sky is blue 
+print(ae.say('the sky is blue'))  #Prof. eric says: It is obvious that I believe that eric says: the sky is blue 
+
+#########   RETURNING  A  FUNCTION!!!!
+x=10
+def general_poly (L):
+    """ L, a list of numbers (n0, n1, n2, ... nk)
+    Returns a function, which when applied to a value x, returns the value 
+    n0 * x^k + n1 * x^(k-1) + ... nk * x^0 """
+    #YOUR CODE HERE 
+    def func(x):
+        L_copy = L[:]
+        L_copy.reverse()
+        result = 0
+        for i in range(len(L_copy)):
+            result += L_copy[i]*(x**i)
+        return result
+    return func
+
+print(general_poly([1, 2, 3, 4])(10))
