@@ -106,3 +106,4 @@ def longest_run(L):
 
 # L = [10, 4, 3, 8, 3, 4, 5, 7, 7, 2]
 # print(longest_run(L))
+
