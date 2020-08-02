@@ -133,8 +133,8 @@ e = Person('eric')
 le = Lecturer('eric') 
 pe = Professor('eric') 
 ae = ArrogantProfessor('eric')
-print(pe.say('the sky is blue'))  #Prof. eric says: I believe that eric says: the sky is blue 
-print(ae.say('the sky is blue'))  #Prof. eric says: It is obvious that I believe that eric says: the sky is blue 
+# print(pe.say('the sky is blue'))  #Prof. eric says: I believe that eric says: the sky is blue 
+# print(ae.say('the sky is blue'))  #Prof. eric says: It is obvious that I believe that eric says: the sky is blue 
 
 #########   RETURNING  A  FUNCTION!!!!
 x=10
@@ -152,4 +152,54 @@ def general_poly (L):
         return result
     return func
 
-print(general_poly([1, 2, 3, 4])(10))
+# print(general_poly([1, 2, 3, 4])(10))
+
+wordList = ['word','apple','tree']
+lStr = ['adwfsroc']
+
+##returns max sum of longest consecutive sum 
+## [1,2,3] returns 6
+## [-1,-1, 1,0] returns 1
+
+# def getMaxConsec(L):
+#     all_lists = []
+#     for i in range(len(L)):
+#         for j in range(i+1,len(L)+1):
+#             all_lists.append(L[i:j])
+
+#     cons_list = []
+#     for sublist in all_lists:
+#         print('this sublist',sublist,' must be',list(range(min(sublist), max(sublist)+1)))
+#         if list(set(sublist)) == list(range(min(sublist), max(sublist)+1)) or sublist == list(range(max(sublist), min(sublist)+1)):
+#             cons_list.append(sublist)
+    
+#     sums_list = [sum(e) for e in cons_list]
+#     print(all_lists, '      ',cons_list,'      ',sums_list)
+
+# L = [-1,-1, 1,0]
+# getMaxConsec(L)
+    
+# def hasConsecutives(L):
+#     sublists = []
+#     for i in range(len(L)):
+#         for j in range(i+1,len(L)+1):
+#             sublists.append(L[i:j])
+#     hasCons = True
+#     for sub in sublists:
+#         iamcons = True
+#         if len(sub) != 1:
+#             ordered = list(range(min(sub), max(sub)+1))
+#             #CHECKS IF ONE LIST CONTAINS THE OTHER
+#             for idx in range(len(ordered) - len(sub)+1):
+#                 for j in range(len(sub)):
+#                     if sub[j] != ordered[idx+j]:
+#                         iamcons = False
+#             if iamcons:
+#                 return iamcons
+                        
+#                 print(sub, ordered)
+
+#     return hasCons
+
+# L = [6,2,5,10,2]
+# print(hasConsecutives(L))
