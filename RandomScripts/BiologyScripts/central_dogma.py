@@ -2,6 +2,9 @@
 # 
 # Piero Orderique
 # 2 August 2020
+# 
+# TODO
+# >>> add a includeNotation boolean value to either return with or without the 5' and 3' notation
 
 #contains the dictionary for converting codons to proteins
 codon_dict = {'AUG':'Met', 'AUA':'Ile', 'AUC':'Ile', 'AUU':'Ile', 
@@ -58,13 +61,16 @@ def transcriptase(dna, start=5):
     '''
     mrna = ''
     if int(start) == 5:
-        DNA += '5\' '+dna+' 3\'\n3\' '
+        print('DNA in 5\' to 3\' was transcribed.\n')
     elif int(start) == 3:
-        DNA += '3\' '+dna+' 5\'\n5\' '
+        print('DNA in 3\' to 5\' was transcribed.\n')
     else:
         raise ValueError ('Invalid start parameter. Use either the number 5 or 3.')
+
+    for base in dna:
+        mrna += dna_to_rna[base]
     
-    pass
+    return mrna
 
 def reverse_transcriptase(mrna):
     '''
@@ -73,6 +79,7 @@ def reverse_transcriptase(mrna):
     dnastring = ''
     pass
 
+#translation
 def mrna_to_protein(mrna):
     if len(mrna) < 3 or 'AUG' not in mrna:
         return 'No Protein'
@@ -91,6 +98,7 @@ def mrna_to_protein(mrna):
     return protein
 
 
-print(dna_replication(dna_ex))
-# print(mrna_to_protein(mrna))
+# print(dna_replication(dna_ex))
+# print(transcriptase(dna_example))
+print(mrna_to_protein(transcriptase(dna_example)))
 
