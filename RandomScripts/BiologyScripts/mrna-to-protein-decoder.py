@@ -26,7 +26,8 @@ dna_to_dna ={'A':'T', 'T':'A', 'C':'G', 'G':'C'}
 dna_to_rna = {'A':'U', 'T':'A', 'C':'G', 'G':'C'}
 rna_to_dna = {'A':'T', 'U':'A', 'C':'G', 'G':'C'}
 
-mrna = "TGGACTACCGGCAATTAGATAAATTCCGGACTTCATTGCATACC"
+dna_example = "TGGACTACCGGCAATTAGATAAATTCCGGACTTCATTGCATACC"
+dna_ex = 'ACCTGATGGCCGTTAATCTATTTAAGGCCTGAAGTAACGTATGG'
 
 def dna_replication(dna, start=5):
     '''
@@ -34,7 +35,20 @@ def dna_replication(dna, start=5):
     start must be either 5 or 3 indicating 5' to 3' or 3' to 5' respectfully (5' is assumed)
         prints one string representing double stranded dna 
     '''
-    pass
+    DNA = ''
+    if int(start) == 5:
+        DNA += '5\' '+dna+' 3\'\n3\' '
+    elif int(start) == 3:
+        DNA += '3\' '+dna+' 5\'\n5\' '
+    else:
+        raise ValueError ('Invalid start parameter. Use either the number 5 or 3.')
+
+    for base in dna:
+        DNA += dna_to_dna[base]
+    if int(start) == 5: DNA += ' 5\''
+    else: DNA += ' 3\''
+
+    return DNA
 
 def transcriptase(dna, start=5):
     '''
@@ -43,7 +57,10 @@ def transcriptase(dna, start=5):
     '''
     pass
 
-def reverseTranscriptase(mrna):
+def reverse_transcriptase(mrna):
+    '''
+    mrna strand (single stranded) to be reverse transcribed back into a single stranded dna molecule
+    '''
     dnastring = ''
     pass
 
@@ -65,5 +82,6 @@ def mrna_to_protein(mrna):
     return protein
 
 
-print(mrna_to_protein(mrna))
+print(dna_replication(dna_ex))
+# print(mrna_to_protein(mrna))
 
