@@ -21,10 +21,49 @@ codon_dict = {'AUG':'Met', 'AUA':'Ile', 'AUC':'Ile', 'AUU':'Ile',
               'CCG':'Pro', 'CCA':'Pro', 'CCC':'Pro', 'CCU':'Pro',
               'CAG':'Gln', 'CAA':'Gln', 'CAC':'His', 'CAU':'His'}
 
-#contains complimentary bases from mrna to dna (reverse transcriptase)
-comp_base = {'A':'T', 'U':'A', 'C':'G', 'G':'C'}
+#contains complimentary bases
+dna_to_dna ={'A':'T', 'T':'A', 'C':'G', 'G':'C'}
+dna_to_rna = {'A':'U', 'T':'A', 'C':'G', 'G':'C'}
+rna_to_dna = {'A':'T', 'U':'A', 'C':'G', 'G':'C'}
 
-mrna = "AUGCAUAUACAC"
+mrna = "TGGACTACCGGCAATTAGATAAATTCCGGACTTCATTGCATACC"
+
+def dna_replication(dna, start=5):
+    '''
+    dna must be a single strand
+    start must be either 5 or 3 indicating 5' to 3' or 3' to 5' respectfully (5' is assumed)
+        prints one string representing double stranded dna 
+    '''
+    pass
+
+def transcriptase(dna, start=5):
+    '''
+    dna must be a single string
+    start must be either 5 or 3 indicating 5' to 3' or 3' to 5' respectfully (5' is assumed)
+    '''
+    pass
 
 def reverseTranscriptase(mrna):
+    dnastring = ''
     pass
+
+def mrna_to_protein(mrna):
+    if len(mrna) < 3 or 'AUG' not in mrna:
+        return 'No Protein'
+    protein = ''
+    start = mrna.find('AUG')
+    for idx in range(start, len(mrna), 3):
+        try:
+            codon = mrna[idx:idx+3]
+        except:
+            break
+        if codon_dict[codon] != 'Stop':
+            protein+= codon_dict[codon]+'-'
+        else:
+            protein += codon_dict[codon]
+            break
+    return protein
+
+
+print(mrna_to_protein(mrna))
+
