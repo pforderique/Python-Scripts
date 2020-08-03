@@ -33,7 +33,7 @@ def dna_replication(dna, start=5):
     '''
     dna must be a single strand
     start must be either 5 or 3 indicating 5' to 3' or 3' to 5' respectfully (5' is assumed)
-        prints one string representing double stranded dna 
+        returns one string representing double stranded dna 
     '''
     DNA = ''
     if int(start) == 5:
@@ -54,7 +54,16 @@ def transcriptase(dna, start=5):
     '''
     dna must be a single string
     start must be either 5 or 3 indicating 5' to 3' or 3' to 5' respectfully (5' is assumed)
+        returns a single mrna strand
     '''
+    mrna = ''
+    if int(start) == 5:
+        DNA += '5\' '+dna+' 3\'\n3\' '
+    elif int(start) == 3:
+        DNA += '3\' '+dna+' 5\'\n5\' '
+    else:
+        raise ValueError ('Invalid start parameter. Use either the number 5 or 3.')
+    
     pass
 
 def reverse_transcriptase(mrna):
