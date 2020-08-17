@@ -29,8 +29,8 @@ dna_to_dna ={'A':'T', 'T':'A', 'C':'G', 'G':'C'}
 dna_to_rna = {'A':'U', 'T':'A', 'C':'G', 'G':'C'}
 rna_to_dna = {'A':'T', 'U':'A', 'C':'G', 'G':'C'}
 
-dna_example = "TGGACTACCGGCAATTAGATAAATTCCGGACTTCATTGCATACC"
-dna_ex = 'ACCTGATGGCCGTTAATCTATTTAAGGCCTGAAGTAACGTATGG'
+dna_example = "GTGCAATAATTGGACTACCGGCAATTAGATAAATTCCGGACTTCATTGCATACC"
+newDNA =      "GTGCAATAATTGGACTACTCGGCAATTAGATAAATTCCGGACTTCATTGCATACC"
 
 def dna_replication(dna, start=5):
     '''
@@ -53,7 +53,7 @@ def dna_replication(dna, start=5):
 
     return DNA
 
-def transcriptase(dna, start=5):
+def transcriptase(dna, start=3):
     '''
     dna must be a single string
     start must be either 5 or 3 indicating 5' to 3' or 3' to 5' respectfully (5' is assumed)
@@ -61,9 +61,9 @@ def transcriptase(dna, start=5):
     '''
     mrna = ''
     if int(start) == 5:
-        print('DNA in 5\' to 3\' was transcribed.\n')
+        print('\nDNA in 5\' to 3\' was transcribed.')
     elif int(start) == 3:
-        print('DNA in 3\' to 5\' was transcribed.\n')
+        print('\nDNA in 3\' to 5\' was transcribed.')
     else:
         raise ValueError ('Invalid start parameter. Use either the number 5 or 3.')
 
@@ -101,4 +101,5 @@ def mrna_to_protein(mrna):
 # print(dna_replication(dna_ex))
 # print(transcriptase(dna_example))
 print(mrna_to_protein(transcriptase(dna_example)))
+print(mrna_to_protein(transcriptase(newDNA)))
 
