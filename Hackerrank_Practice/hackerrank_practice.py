@@ -41,8 +41,51 @@ def cutTheTree(data, edges):
         diffs.append(abs(sum1-sum2))
     return min(diffs)
 
-# data = [100, 200 ,100, 500, 100, 600]
-data = [205, 573, 985 ,242, 830, 514, 592, 263 ,142, 915]
-# edges = [(1, 2),(2, 3),(2, 5),(4, 5),(5, 6)]
-edges = [(2,8),(10,5),(1,7),(6,9),(4,3),(8,10),(5,1),(7,6),(9,4)]
-cutTheTree(data,edges)
+# # data = [100, 200 ,100, 500, 100, 600]
+# data = [205, 573, 985 ,242, 830, 514, 592, 263 ,142, 915]
+# # edges = [(1, 2),(2, 3),(2, 5),(4, 5),(5, 6)]
+# edges = [(2,8),(10,5),(1,7),(6,9),(4,3),(8,10),(5,1),(7,6),(9,4)]
+# cutTheTree(data,edges)
+
+#Grading Students
+def gradingStudents(grades):
+    out = []
+    for idx,grade in enumerate(grades):
+        if grade < 38:
+            print(grade)
+            out.append(grade) 
+        elif grade%5 > 2:
+            print(str(grade+5-(grade%5)))
+            out.append(grade+5-(grade%5))
+        else:
+            print(grade)
+            out.append(grade) 
+    return out
+
+#Apple and Orange
+def countApplesAndOranges(s, t, a, b, apples, oranges):
+    """
+    >>> countApplesAndOranges(7, 11, 5, 15, [-2, 2, 1], [5, -6])
+    1
+    1
+    """
+    print(sum([1 for apple in apples if (a+apple) >= s and (a+apple) <= t]))
+    print(sum([1 for orange in oranges if (b+orange) >= s and (b+orange) <= t]))
+
+#Between Two Sets
+def getTotalX(a, b):
+    count = 0
+    num = maxA = max(a)
+    minB = min(b)
+    while(num <= minB):
+        if all([True if num%fac==0 else False for fac in a]) and all([True if fac%num==0 else False for fac in b]):
+            count += 1
+        num += maxA
+    return count
+
+
+
+#doctest
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
