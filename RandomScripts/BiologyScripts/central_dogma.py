@@ -81,6 +81,7 @@ def reverse_transcriptase(mrna):
 
 #translation
 def mrna_to_protein(mrna):
+    print('\nmrna translated:')
     if len(mrna) < 3 or 'AUG' not in mrna:
         return 'No Protein'
     protein = ''
@@ -98,8 +99,8 @@ def mrna_to_protein(mrna):
     return protein
 
 
-# print(dna_replication(dna_ex))
-# print(transcriptase(dna_example))
+print(dna_replication(dna_example))
+print(transcriptase(dna_example))
 print(mrna_to_protein(transcriptase(dna_example)))
 print(mrna_to_protein(transcriptase(newDNA)))
 
