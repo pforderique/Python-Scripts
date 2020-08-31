@@ -73,15 +73,7 @@ def countApplesAndOranges(s, t, a, b, apples, oranges):
     print(sum([1 for orange in oranges if (b+orange) >= s and (b+orange) <= t]))
 
 #Between Two Sets
-def getTotalX(a, b):
-    count = 0
-    num = maxA = max(a)
-    minB = min(b)
-    while(num <= minB):
-        if all([True if num%fac==0 else False for fac in a]) and all([True if fac%num==0 else False for fac in b]):
-            count += 1
-        num += maxA
-    return count
+
 
 
 
