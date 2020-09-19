@@ -83,10 +83,18 @@ def countingValleys(steps, path):
             totalValleys += 1
         lastStep = current
     return totalValleys
+    # print(countingValleys(8,'DDDUUDUUUDDU'))
+
+#Left Rotation
+def rotateLeft(d, arr):
+    arrprime = [0]*len(arr)
+    for i in range(len(arr)):
+        arrprime[(i-d)%len(arr)] = arr[i]
+    return arrprime
+print(rotateLeft(2,[1,2,3,4,5]))
 
 #doctest
 # if __name__ == "__main__":
 #     import doctest
 #     doctest.testmod()
 
-print(countingValleys(8,'DDDUUDUUUDDU'))
