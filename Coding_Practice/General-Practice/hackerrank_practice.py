@@ -91,7 +91,35 @@ def rotateLeft(d, arr):
     for i in range(len(arr)):
         arrprime[(i-d)%len(arr)] = arr[i]
     return arrprime
-print(rotateLeft(2,[1,2,3,4,5]))
+    # print(rotateLeft(2,[1,2,3,4,5]))
+
+#Sparse Arrays - assuming no repeating queries
+def matchingStringss(strings, queries):
+    result = []
+    for q in queries:
+        total = 0
+        i = 0
+        while i < len(strings):
+            print(q,i,strings, "total:",total)
+            if q == strings[i]:
+                total += 1
+                strings.pop(i)
+                i-=1
+            i+=1
+        result.append(total)
+    return result
+def matchingStrings(strings, queries):
+    result = []
+    for q in queries:
+        total = 0
+        for s in strings:
+            if q == s:
+                total+=1
+        result.append(total)
+    return result
+    print(matchingStrings(['ab','ab','abc'], ['ab','abc','bc']))
+
+#
 
 #doctest
 # if __name__ == "__main__":
