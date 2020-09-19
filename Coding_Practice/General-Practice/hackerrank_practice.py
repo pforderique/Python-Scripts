@@ -72,12 +72,21 @@ def countApplesAndOranges(s, t, a, b, apples, oranges):
     print(sum([1 for apple in apples if (a+apple) >= s and (a+apple) <= t]))
     print(sum([1 for orange in oranges if (b+orange) >= s and (b+orange) <= t]))
 
-#Between Two Sets
-
-
-
+#Counting Valleys
+def countingValleys(steps, path):
+    stepDict = {"D":-1, "U":1}
+    totalValleys = 0
+    lastStep = 0
+    for char in path:
+        current = lastStep + stepDict[char]
+        if lastStep < 0 and current == 0:
+            totalValleys += 1
+        lastStep = current
+    return totalValleys
 
 #doctest
-if __name__ == "__main__":
-    import doctest
-    doctest.testmod()
+# if __name__ == "__main__":
+#     import doctest
+#     doctest.testmod()
+
+print(countingValleys(8,'DDDUUDUUUDDU'))
