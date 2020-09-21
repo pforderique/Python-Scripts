@@ -119,7 +119,27 @@ def matchingStrings(strings, queries):
     return result
     print(matchingStrings(['ab','ab','abc'], ['ab','abc','bc']))
 
-#
+#balanced Sum - Salesforce
+def balancedSum(arr):
+    LHS = arr[0]
+    RHS = sum(arr[2:])
+    for i in range(1, len(arr)-1):
+        if LHS == RHS:
+            return i
+        else:
+            LHS += arr[i]
+            RHS -= arr[i+1]
+    return -1
+
+
+def sortIntersect(volcanic, nonVolcanic):
+    result = []
+    for vol in volcanic:
+        try:
+            result.append(nonVolcanic.pop(nonVolcanic.index(vol)))
+        except:
+            pass
+    return result
 
 #doctest
 # if __name__ == "__main__":
