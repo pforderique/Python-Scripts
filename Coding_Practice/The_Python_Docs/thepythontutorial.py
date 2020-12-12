@@ -36,7 +36,7 @@ def sec44():
     #continue goes on to the next ieration
     #pass can be used for funcs, classes, and while statements
 
-#Sections 4.7: More on Functions (*args, **kwargs)
+#Section 4.7: More on Functions (*args, **kwargs)
 def sec47():
     # The default values are evaluated at the point of function definition
     
@@ -116,5 +116,38 @@ def sec47():
         pass
     print(myFunc.__doc__) #prints out description. Every thing will be tabbed except for first line (unless you also include it UNDER ''')
 
+    ## ADDITIONAL COMMENTS: CODING STYLE PEP 8 ##
+
+    # Use 4-space indentation, and no tabs.
+    # Wrap lines so that they don’t exceed 79 characters.
+    # Use blank lines to separate functions and classes, and larger blocks of code inside functions.
+    # When possible, put comments on a line of their own.
+    # Use docstrings.
+    # Use spaces around operators and after commas, but not directly inside bracketing constructs: a = f(1, 2) + g(3, 4).
+    # Name your classes and functions consistently; UpperCamelCase for classes and lowercase_with_underscores for functions and methods. 
+    # Don’t use fancy encodings if your code is meant to be used in international environments. Python’s default, UTF-8, or even plain ASCII work best in any case.
+    # Likewise, don’t use non-ASCII characters in identifiers if there is only the slightest chance people speaking a different language will read or maintain the code.
+
+#Section 5.1: LISTS - stacks, queues
+def sec51():
+    #List as STACK (FILO/LIFO)
+    stack = [1,2,3]
+    stack.append(4)
+    stack.append(5)
+    stack.pop() #pops/removes the last one appended! LIFO
+    print(stack)
+
+    #List as QUEUE (FIFO/LILO) - 
+        # doing inserts or pops from the beginning of a list is slow (because all of the other elements have to be shifted by one
+        # Use collections.deque - designed to have fast appends and pops from both ends
+    from collections import deque # deque is a DOUBLE-ENDED QUEUE (generalized queue)
+    queue = deque(["Eric", "John", "Michael"])
+    queue.append("Terry")           # Terry arrives
+    queue.append("Graham")          # Graham arrives
+    queue.popleft()                 # The first to arrive now leaves
+    queue.popleft()                 # The second to arrive now leaves
+    print(queue)                    # Remaining queue in order of arrival
+
+
 if __name__ == "__main__":
-    sec47()
+    sec51()
