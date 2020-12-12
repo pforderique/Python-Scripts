@@ -204,7 +204,17 @@ def sec57():
     # (1, 2, 3)             == (1.0, 2.0, 3.0)
     # (1, 2, ('aa', 'ab'))   < (1, 2, ('abc', 'a'), 4)
 
+#Section 6.0: Modules
+def sec6():
+    '''
+    Presents what Modules are and how to format them.
 
+    Ex: module.py
+    '''
+    import fibo
+
+    fibo.fib(1000)
+    print(fibo.__name__)
 
 if __name__ == "__main__":
-    sec57()
+    sec6()
