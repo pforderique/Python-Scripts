@@ -148,6 +148,23 @@ def sec51():
     queue.popleft()                 # The second to arrive now leaves
     print(queue)                    # Remaining queue in order of arrival
 
+#Section 5.4: SETS
+def sec54():
+    # Set operations
+    a = set('fabrizzio')
+    b = {x for x in 'orderique' if x not in 'qyz'} #can also do set comprehension!
+    print(a)        # unique letters in a
+    print(a - b)    # letters in a but not in b
+    print(a | b)    # letters in a OR b OR both (OR)
+    print(a & b)    # letters in BOTH a and b (AND)
+    print(a ^ b)    # letters in a or b but NOT both (XOR)
+
+#Section 5.6: Looping Techniques
+def sec56():
+    #dictionary looping
+    d = dict(sape=4139, guido=4127, jack=4098) #same as d = {'sape': 4139, 'guido': 4127, 'jack': 4098}
+    for key,val in d.items():
+        print(key, val)
 
 if __name__ == "__main__":
-    sec51()
+    sec56()
