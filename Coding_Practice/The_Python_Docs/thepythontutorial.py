@@ -204,17 +204,38 @@ def sec57():
     # (1, 2, 3)             == (1.0, 2.0, 3.0)
     # (1, 2, ('aa', 'ab'))   < (1, 2, ('abc', 'a'), 4)
 
-#Section 6.0: Modules
+#Section 6.0: Modules and Packages
 def sec6():
     '''
     Presents what Modules are and how to format them.
 
     Ex: module.py
     '''
-    import fibo
+    #import fibo #cannot be resolved because it is looking for this in the ROOT project dirctory... you have this opened on PythonScripts
+        # from fibo import fib, fib2    #this also works, however fibo would not be defined!
+        # from fibo import *            #this imports all names except those beginning with an underscore (_). Try not to do this!
+            # importing * from a module or package is frowned upon, since it often causes poorly readable code
+    # fibo.fib(1000)
+    # f = fibo.fib    #can also use your own variable
+    # f(1000)
 
-    fibo.fib(1000)
-    print(fibo.__name__)
+    '''
+    Hierarchy:
+        Looks for module first in ...
+        1) built-in modules
+        2) searches for a file named 'insertmodulename' in a list of directories given by the variable sys.path. sys.path
+    '''
+
+    #The built-in function dir([module]) is used to find out which names a module defines. It returns a sorted list of strings:
+    # import fibo
+    # print(dir(fibo))
+
+    ### Modules and Packages ###
+        # Just like the use of modules saves the authors of different modules from having to worry about 
+        # each other’s global variable names, the use of dotted module names saves the authors of multi-module packages 
+        # like NumPy or Pillow from having to worry about each other’s module names.
+    
+
 
 if __name__ == "__main__":
     sec6()
