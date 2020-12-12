@@ -166,5 +166,45 @@ def sec56():
     for key,val in d.items():
         print(key, val)
 
+    #sequences (lists, tuples, strings)
+    for idx, elem in enumerate(['tic', 'tac', 'toe']):
+        print(idx, elem)
+
+    #To loop over two or more sequences at the same time, the entries can be paired with the zip() function.
+    questions = ['name', 'quest', 'favorite color']
+    answers = ['lancelot', 'the holy grail', 'blue']
+    for q, a in zip(questions, answers):
+        print('What is your {0}?  It is {1}.'.format(q, a))
+
+    #To loop over a sequence in reverse, first specify the sequence in a forward direction and then call the reversed() function.
+    for i in reversed(range(1, 10, 2)):
+        print(i)
+
+    #To loop over a sequence in sorted order, use the sorted() function which returns a new sorted list while leaving the source unaltered.
+    basket = ['apple', 'orange', 'apple', 'pear', 'orange', 'banana']
+    for fruit in sorted(basket):
+        print(fruit)
+    print('-'*10)
+    for fruit in sorted(set(basket)): #also use set to get unique values!!! Very idiomatic!
+        print(fruit)
+
+#Section 5.7: Conditionals
+def sec57():
+    #Remeber that AND and OR stop after one evaluates to True. E.g:
+    string1, string2, string3 = '', 'piero', 'dance'
+    non_null = string1 or string2 or string3
+    print(non_null) #prints piero
+
+    #Comparisons (Sec 5.8) that evaulate to True:
+    # (1, 2, 3)              < (1, 2, 4)
+    # [1, 2, 3]              < [1, 2, 4]
+    # 'ABC' < 'C' < 'Pascal' < 'Python'
+    # (1, 2, 3, 4)           < (1, 2, 4)
+    # (1, 2)                 < (1, 2, -1)
+    # (1, 2, 3)             == (1.0, 2.0, 3.0)
+    # (1, 2, ('aa', 'ab'))   < (1, 2, ('abc', 'a'), 4)
+
+
+
 if __name__ == "__main__":
-    sec56()
+    sec57()
