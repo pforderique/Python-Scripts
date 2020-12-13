@@ -1,7 +1,4 @@
 #Section 3.1.2: Strings
-from os import linesep
-
-
 def sec312():
     print('C:\some\name') #get rid of this by 
     print(r'C:\some\name') #using raw string
@@ -354,8 +351,27 @@ def sec72():
     with open(myFile, 'r+') as f:
         json.dump(x, f)
 
+#Section 8.0: Exceptions
+def sec8():
+    #finally
+    '''
+    If an exception occurs during execution of the try clause, the exception may be handled by an except clause. If the exception is not handled by an except clause, 
+        the exception is re-raised after the finally clause has been executed.
+    An exception could occur during execution of an except or else clause. 
+    Again, the exception is re-raised after the finally clause has been executed.
+    If the try statement reaches a break, continue or return statement, the finally clause will execute just prior to the break,
+        continue or return statement’s execution.
+    If a finally clause includes a return statement, the returned value will be the one from the finally clause’s return statement, not the value from the try clause’s return statement.
+    '''
+    def bool_return():
+        try:
+            return True
+        finally:
+            return False
+
+    bool_return() # returns False
 
 
 
 if __name__ == "__main__":
-    sec72()
+    sec8()
