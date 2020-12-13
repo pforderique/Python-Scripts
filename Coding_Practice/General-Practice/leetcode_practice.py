@@ -37,11 +37,11 @@ class Solution:
             col2 -= 1
         if side%2 == 0:
             return res
-        return res - mat[side//2][side//2] #124 ms
+        return res - mat[side//2][side//2] #124 ms -- while loop is actually a bit slower than for in python!
 
 
 if __name__ == "__main__":
     sol = Solution()
     # print(sol.findNumbers([12,345,2,6,7896]))
     # print(sol.minTimeToVisitAllPoints([[1,1],[3,4],[-1,0]]))
-    print(sol.diagonalSum([[1,2,3],[4,5,6],[7,8,9]]))
+    # print(sol.diagonalSum([[1,2,3],[4,5,6],[7,8,9]]))
