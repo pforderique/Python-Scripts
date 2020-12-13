@@ -12,6 +12,10 @@ class Solution:
         return res #92 ms
 
     def minTimeToVisitAllPoints(self, points) -> int:
+        '''
+        Given a list of points, find the minimum time needed to travel to all of them.
+        1) need to go in order, 2) moving vert, hori, or diag = 1 sec
+        '''
         def gettimebetweenpoints(pt1, pt2):
             dist = (abs(pt2[0] - pt1[0]), abs(pt2[1] - pt1[1]))
             diag = min(dist)
