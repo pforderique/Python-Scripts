@@ -445,8 +445,35 @@ class Struct():
         #Struct.age = 23
     pass
 
+#Section 10.11: QUALITY CONTROL (TESTING)
+def sec1011():
+    import doctest
+    doctest.testmod()
 
+    #UNITTESTS
+    import unittest
 
+    class TestStatisticalFunctions(unittest.TestCase):
+
+        def test_average(self):
+            self.assertEqual(mysum(40,10), 50)
+            self.assertEqual(round(mysum(30,30)), 0)
+            with self.assertRaises(ZeroDivisionError):
+                mysum(-1,0)
+            with self.assertRaises(TypeError):
+                mysum(-100,0)
+
+    unittest.main()  # Calling from the command line invokes all tests
+def mysum(a,b):
+    '''Computes sum - doctest example
+
+    >>> mysum(40,10)
+    50
+    >>> mysum(30,30)
+    0
+    '''
+    if a!=b: return a+b 
+    else: return 0
 
 if __name__ == "__main__":
-    sec9()
+    sec1011()
