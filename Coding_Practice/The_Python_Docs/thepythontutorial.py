@@ -1,4 +1,7 @@
 #Section 3.1.2: Strings
+from os import linesep
+
+
 def sec312():
     print('C:\some\name') #get rid of this by 
     print(r'C:\some\name') #using raw string
@@ -234,8 +237,125 @@ def sec6():
         # Just like the use of modules saves the authors of different modules from having to worry about 
         # each other’s global variable names, the use of dotted module names saves the authors of multi-module packages 
         # like NumPy or Pillow from having to worry about each other’s module names.
-    
+    '''
+    sound/                      Top-level package
+      __init__.py               Initialize the sound package
+      formats/                  Subpackage for file format conversions
+              __init__.py
+              wavread.py
+              wavwrite.py
+              aiffread.py
+              aiffwrite.py
+              auread.py
+              auwrite.py
+              ...
+      effects/                  Subpackage for sound effects
+              __init__.py
+              echo.py
+              surround.py
+              reverse.py
+              ...
+    '''
+    # The __init__.py files are required to make Python treat directories containing the file as packages.
+    # Users of the package can import individual modules from the package, for example:
+        #import sound.effects.echo OR from sound.effect import echo (better! bc now we can just refer to echo.echofilter(args))
+    # Yet another variation is to import the desired function or variable directly:
+        #from sound.effects.echo import echofilter (now we can just call echofilter(args) directly!)
+
+    ## IMPORTING * FROM A PACKAGE ##
+    #now what happens when the user writes from sound.effects import *?
+        # importing every module in a package can take a LONG TIME, so 
+        # the only solution is for the package author to provide an explicit index of the package
+            # if a package’s __init__.py code defines a list named __all__, it is taken to be the 
+            # list of module names that should be imported when from package import * is encountered.
+                # For example, the __init__.py file in sound could include:
+                    # __all__ = ["echo", "surround", "reverse"]
+
+    '''
+    You can also write relative imports:
+    These imports use leading dots to indicate the current and parent packages involved in the relative import.
+
+    from . import echo
+    from .. import formats
+    from ..effects import surround
+
+    Note that relative imports are based on the name of the current module. 
+    Since the name of the main module is always "__main__", modules intended for use as the main module of a Python application 
+    must always use absolute imports.
+    '''
+
+    '''
+    Packages in Multiple Directories:
+    Packages support one more special attribute, __path__. This is initialized to be a list 
+    containing the name of the directory holding the package’s __init__.py before the code in that file is executed.
+    '''
+
+#Section 7.0: I/O - Formatting Strings
+def sec7():
+    #formatted string literals:
+    name = "Piero"
+    food = "pizza"
+    print(f'My name is {name} and I like {food}')
+    print('My name is {1} and I like {0}'.format(food, name))
+    print(f'The value of pi is approximately {3.14159265:.3f}.')
+    #Passing an integer after the ':' will cause that field to be a minimum number of characters wide. 
+    #This is useful for making columns line up.
+    table = {'Sjoerd': 4127, 'Jack': 4098, 'Dcab': 7678}
+    for name, phone in table.items():
+        print(f'{name:10} ==> {phone:10d}')
+    #Other modifiers can be used to convert the value before it is formatted. 
+    #'!a' applies ascii(), '!s' applies str(), and '!r' applies repr():
+    animals = 'eels'
+    print(f'My hovercraft is full of {animals}.')
+    print(f'My hovercraft is full of {animals!r}.')
+    #Can also format with DICTIONARY! Just use 0[key]
+    print('Jack: {0[Jack]:d}; Sjoerd: {0[Sjoerd]:d}; ' 
+            'Dcab: {0[Dcab]:d}'.format(table))
+    print('Jack: {Jack:d}; Sjoerd: {Sjoerd:d}; Dcab: {Dcab:d}'.format(**table)) #can also pass in dict with **
+    for x in range(1, 11):
+        print('{0:2d} {1:3d} {2:4d}'.format(x, x*x, x*x*x))
+
+    #Zfills
+    print('12'.zfill(5))
+
+    #For testing, convert any value to a string with the repr() or str() functions.
+
+#Section 7.2: I/O - Files
+def sec72():
+    #It is good practice to use the with keyword when dealing with file objects. 
+    myFile = r'C:\Users\fabri\OneDrive\Documents\DasText_and_Data\DasText\pyprac.txt'
+
+    # with open(myFile) as f:
+    #     howMuch = 30 #up to 30 chars (optional!)
+    #     read_data = f.read(howMuch)
+    #     print(read_data,'\n')
+
+    # READING
+    with open(myFile) as f:
+        # line = f.readline()
+        # print(line)
+        # for line in f:
+        #     print(line, end=' ')
+        # print(f.readlines()) is the same as print(list(f)) -- list of all the lines
+        pass
+
+    # WRITING
+    with open(myFile, 'a') as f:
+        f.write('This is a test\n')
+        for item in ["apple", 2, 4, 7]:
+            f.write(str(item))
+        print(f.tell()) #returns an integer giving the file object’s current position
+        #to change the file object’s position, use f.seek(offset, whence)
+
+    #JSON structured data
+    import json
+    x = [1, 'simple', 'list']
+    json.dumps(x)
+    with open(myFile, 'r+') as f:
+        json.dump(x, f)
+
+
 
 
 if __name__ == "__main__":
-    sec6()
+    sec72()
