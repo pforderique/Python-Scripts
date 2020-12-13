@@ -1,4 +1,3 @@
-# 1295. Find Numbers with Even Number of Digits
 class Solution:
     def findNumbers(self, nums) -> int:
         '''
