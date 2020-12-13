@@ -371,7 +371,82 @@ def sec8():
 
     bool_return() # returns False
 
+#Section 9.0: Classes + Generators
+def sec9():
+    d1 = Dog()
+    d2 = AgedDog(20)
+    print(d1.__class__)
+    print(d2.__class__)
+    d1.bark()
+    d2.bark() # looks for attributes/methods first in class, then in higher class and so on
+    print('-'*30)
+    #class Multi(Base1, Base2, Base3): #multi inheritence searches depth first, left to right.
+
+    #ITERABLES:
+    s = 'abc'
+    it = iter(s)
+    print(next(it), next(it), next(it)) #calling next(it) once more will raise a StopIteration exception
+    '''class Reverse:
+            """Iterator for looping over a sequence backwards."""
+            def __init__(self, data):
+                self.data = data
+                self.index = len(data)
+
+            def __iter__(self):
+                return self
+
+            def __next__(self):
+                if self.index == 0:
+                    raise StopIteration
+                self.index = self.index - 1
+                return self.data[self.index]'''
+    '''
+    rev = Reverse('spam')
+    iter(rev)
+
+    for char in rev:
+        print(char, end = ' ') --- prints: m a p s
+    '''
+    #HOWEVER! An easier way exists - GENERATORS!
+    def reverse(data):
+        for index in range(len(data)-1, -1, -1):
+            yield data[index]
+
+    for c in reverse('pieroo'):
+        print(c, end=' ')
+x = 10
+class Dog:
+    tag = 0 #class variable - shared between all instances (if mutable, then changing in one changes in all!)
+    name = "Skipper"
+    
+    def __init__(self) -> None:
+        self.name = "Daisy" #instance vars override class vars
+        self.var = x # class is never used as a global scope - checks module for x
+    def bark(self):
+        print("I am dog")
+
+    #"PRIVATE VARIABLES"
+        # _spam = convention for when you don't want it to be used as public part of API
+        # NAME MANGLING:
+            # __spam = helpful for letting subclasses override methods without breaking intraclass method calls
+                # replaced with _ClassName__spam
+
+    __bark = bark #private copy of original bark() method  
+class AgedDog(Dog):  # can also use |class DerivedClassName(modname.BaseClassName):| if class def in another module
+    def __init__(self, age) -> None:
+        super().__init__()
+        self.age = age
+    def bark(self):
+        print("I am aged dog")
+class Struct():
+    #an empty class can allow you to simulate C++'s struct 
+    #simply add features elsewhere like
+        #Struct.name = "joe"
+        #Struct.age = 23
+    pass
+
+
 
 
 if __name__ == "__main__":
-    sec8()
+    sec9()
