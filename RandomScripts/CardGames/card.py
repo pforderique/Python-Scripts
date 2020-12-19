@@ -20,6 +20,8 @@ class Card:
     def __str__(self) -> str:
         return self.rank + self.suit
 
+    def __eq__(self, o: object) -> bool:
+        return self.__str__ == o.__str__
 
 class CardException(Exception):
     pass

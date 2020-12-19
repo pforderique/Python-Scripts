@@ -9,6 +9,7 @@ class Deck():
     def __init__(self) -> None:
         """Creates 52 card deck."""
         self.deck = [Card(rank, suit) for rank in Card.ranks for suit in Card.suits]
+        self.initialState = self.deck[:]
 
     def __str__(self) -> str:
         readableDeck = [str(c) for c in self.deck]
@@ -46,6 +47,9 @@ class Deck():
         """
         times = 693
         self.shuffle(times=times)
+
+        def runmetrics():
+
 
     def sort(type = 'bysuit', order = 'ascending'):
         """sorts deck by suit - [all Hs, Ss, Ds, Cs]"""
