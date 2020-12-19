@@ -51,7 +51,10 @@ class Deck():
         def runmetrics():
             numDifferent = 0
             for card1, card2 in zip(self.deck, self.initialState):
-                pass
+                if card1 != card2:
+                    numDifferent+=1
+            print("Number different: {} \n % changes: {}%".format(numDifferent, round(float(numDifferent)/len(self.deck), 2)))
+        runmetrics() # about 94% of cards get mixed up... much better!
 
     def sort(type = 'bysuit', order = 'ascending'):
         """sorts deck by suit - [all Hs, Ss, Ds, Cs]"""
