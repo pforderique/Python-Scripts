@@ -3,6 +3,7 @@
 # 12/19/2020
 
 from card import Card
+from random  import randint, shuffle
 
 class Deck():
     def __init__(self) -> None:
@@ -17,9 +18,13 @@ class Deck():
         """swaps the positions of the 2 cards in the deck"""
         self.deck[idx1], self.deck[idx2] = self.deck[idx2], self.deck[idx1]
 
-    def shuffle(self, times = 1):
-        """mixes up card order in the deck"""
-        pass
+    def shuffle(self, *, times):
+        """performs specified number of random swaps in the deck"""
+        for i in range(times):
+            idx1 = randint(0,len(self.deck)-1)
+            idx2 = randint(0,len(self.deck)-1)
+            print('cards swapped {} <-> {}'.format(self.deck[idx1], self.deck[idx2]))
+            self.swap(idx1,idx2)
 
     def sort(type = 'bysuit', order = 'ascending'):
         """sorts deck by suit - [all Hs, Ss, Ds, Cs]"""
@@ -28,7 +33,7 @@ class Deck():
 # debugging   
 if __name__ == "__main__":
     deck1 = Deck()
-    print(deck1) # before swap
+    print("ORIGINAL DECK: \n"+ str(deck1)) # before swap
     print('---'*10)
-    deck1.swap(3,51)
-    print(deck1) # after swap
+    deck1.shuffle(times=100)
+    print(deck1)
