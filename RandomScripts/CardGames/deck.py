@@ -49,7 +49,9 @@ class Deck():
         self.shuffle(times=times)
 
         def runmetrics():
-
+            numDifferent = 0
+            for card1, card2 in zip(self.deck, self.initialState):
+                pass
 
     def sort(type = 'bysuit', order = 'ascending'):
         """sorts deck by suit - [all Hs, Ss, Ds, Cs]"""

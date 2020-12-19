@@ -20,12 +20,19 @@ class Card:
     def __str__(self) -> str:
         return self.rank + self.suit
 
-    def __eq__(self, o: object) -> bool:
-        return self.__str__ == o.__str__
+    def __eq__(self, other: object) -> bool:
+        if isinstance(other, self.__class__):
+            return str(self) == str(other)
+        else:
+            return False
 
 class CardException(Exception):
     pass
 
 # testing
 if __name__ == "__main__":
-    print(Card('J', 'H'))
+    c1 = Card('J', 'H')
+    c2 = Card('J', 'H')
+    print(c1)
+    print(c2)
+    print(c1 == c2)
