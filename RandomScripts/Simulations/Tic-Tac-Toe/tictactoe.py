@@ -35,18 +35,42 @@ class TicTacToe:
         gameOver = False
         while not gameOver:
             self.winner = self.getWinner()
-            # quit game if a winner was selected
-            if self.winner != 'None':
-                gameOver =True
+            # quit game if draw 
+            if self.winner == 'Draw':
+                gameOver = True
+                print("\nGAME ENDED: DRAW")
                 break
-            elif self.winner == self.player1name:
-                pass
-            
-
+            #else keep playing the game
+            # optionssss...
+        self.show_winning_message(self.winner)
 
     def getWinner(self) -> str:
         """
-        returns "None", "P1", or "P2" by checking winning conditions
+        returns "None", P1.name, P2.name, or "DRAW" by checking winning conditions
+        """
+        full = True
+        xCount = oCount = 0
+        # check for empty cells AND row completions
+        for row in self.board:
+            for elem in row:
+                if elem == ' ': full = False
+                elif elem == 'X': xCount+=1
+                elif elem == 'O': oCount+=1
+            # reset the counters for next row
+            xCount = oCount = 0 
+        if full: return 'Draw'
+        if xCount == 3: return self.player1name
+        if oCount == 3: return self.player2name
+
+        # now check for diagonals
+        for idx1 in range(self.board):
+            # TL to BR / TR to BL
+            # [00] [11] [22] / [02] [11] [20]
+            pass
+
+    def show_winning_message(self, winnerName):
+        """
+        docstring
         """
         pass
 
