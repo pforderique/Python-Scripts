@@ -75,11 +75,24 @@ class Solution:
                     break
         return total
 
+    def sortArrayByParity(self, A):
+        evens = []
+        odds = []
+        for num in A:
+            if num % 2 == 0: evens.append(num)
+            else: odds.append(num)
+        evens.extend(odds)
+        return evens
+
+        # AWESOME one-liner: return sorted(A, key=lambda x: x & 1)
+
 if __name__ == "__main__":
     sol = Solution()
-    # print(sol.findNumbers([12,345,2,6,7896]))
-    # print(sol.minTimeToVisitAllPoints([[1,1],[3,4],[-1,0]]))
-    # print(sol.diagonalSum([[1,2,3],[4,5,6],[7,8,9]]))
-    # print(sol.destCity([["London","New York"],["New York","Lima"],["Lima","Sao Paulo"]]))
-    # print(sol.maxProduct([1,5,4,5]))
-    # print(sol.countNegatives([[4,3,2,-1],[3,2,1,-1],[1,1,-1,-2],[-1,-1,-2,-3]]))
+    # past testing:
+        # print(sol.findNumbers([12,345,2,6,7896]))
+        # print(sol.minTimeToVisitAllPoints([[1,1],[3,4],[-1,0]]))
+        # print(sol.diagonalSum([[1,2,3],[4,5,6],[7,8,9]]))
+        # print(sol.destCity([["London","New York"],["New York","Lima"],["Lima","Sao Paulo"]]))
+        # print(sol.maxProduct([1,5,4,5]))
+        # print(sol.countNegatives([[4,3,2,-1],[3,2,1,-1],[1,1,-1,-2],[-1,-1,-2,-3]]))
+    print(sol.sortArrayByParity([3,1,2,4]))
