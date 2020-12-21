@@ -1,3 +1,6 @@
+from typing import Counter
+
+
 class Solution:
     def findNumbers(self, nums) -> int:
         '''
@@ -56,6 +59,22 @@ class Solution:
     def maxProduct(self, nums: list) -> int:
         return  (nums.pop(nums.index(max(nums)))-1) * (nums.pop(nums.index(max(nums))) - 1)
 
+    def countNegatives(self, grid) -> int:
+        # grid rows are sorted in descending order
+        total = 0 
+        for row in grid:
+            # go until -1 
+            for i in range(len(row)-1, -2, -1):
+                # if we reached out of index, then all were negative numbers 
+                if i == -1:
+                    total += len(row)
+                    break
+                # else run until you find a positive number
+                if row[i] >= 0:
+                    total += len(row) - i - 1 # this will be the number of negative numbers in the row
+                    break
+        return total
+
 if __name__ == "__main__":
     sol = Solution()
     # print(sol.findNumbers([12,345,2,6,7896]))
@@ -63,3 +82,4 @@ if __name__ == "__main__":
     # print(sol.diagonalSum([[1,2,3],[4,5,6],[7,8,9]]))
     # print(sol.destCity([["London","New York"],["New York","Lima"],["Lima","Sao Paulo"]]))
     # print(sol.maxProduct([1,5,4,5]))
+    # print(sol.countNegatives([[4,3,2,-1],[3,2,1,-1],[1,1,-1,-2],[-1,-1,-2,-3]]))
