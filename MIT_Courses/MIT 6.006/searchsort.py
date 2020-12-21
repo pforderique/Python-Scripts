@@ -46,6 +46,20 @@ def insertionsort(arr: list) -> None:
             # if its greater or equal to previous, then leave it there
             else: break
         
+def mergesort(arr: list) -> None:
+    """mutates list by performing merge sort on it"""
+    pass
+
+def merge(arr1: list, arr2: list) -> list:
+    """merges 2 lists using two finger algorithm"""
+    pass
+    
 if __name__ == "__main__":
     from doctest import testmod
     testmod()
+    
+    # a1 = [66, 36, 2, 66, 34, 34, 82, 82, 38, 39, 97, 19, 99, 27, 59, 79, 42, 57, 96, 
+    # 77, 26, 66, 59, 66, 50, 30, 86, 60, 4, 65, 23, 28, 39, 42, 55, 10, 43, 50, 66, 9]
+    a1 = [4,8,2]
+    insertionsort(a1)
+    print(a1)
