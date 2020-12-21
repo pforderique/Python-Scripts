@@ -2,7 +2,10 @@
 # Written by Piero Orderique
 # Date Started: 12/21/2020
 
-def binarysearch(target: object, arr: str) -> bool:
+####################################################
+############          SEARCHES          ############
+####################################################
+def binarysearch(target: object, arr: list) -> bool:
     """input a list and return True if target in arr. Assumes arr is sorted ascending
     >>> binarysearch(10, [])
     False
@@ -21,9 +24,21 @@ def binarysearch(target: object, arr: str) -> bool:
     # else, let's check in right half
     else: return binarysearch(target, arr[mid+1:]) # could produce out of bounds error
 
+###################################################
+############           SORTS           ############
+###################################################
+def insertionsort(arr: list) -> None:
+    """returns original list but sorted
+    >>> insertionsort([])
+    []
+    """
+    # if empty, just go ahead and return empty list
+    if arr == []: return arr
+    # else, we start the sorted list with the first element
+    # then we iterate through rest of the list - for every element left, 
+        # insert it in our sorted array by swapping until no more swaps needed
+    
+
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
-
-
-
