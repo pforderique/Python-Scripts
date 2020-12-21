@@ -53,6 +53,8 @@ class Solution:
         # A, B = map(set, zip(*paths))
         # return (B - A).pop()
 
+    def maxProduct(self, nums: list) -> int:
+        return  (nums.pop(nums.index(max(nums)))-1) * (nums.pop(nums.index(max(nums))) - 1)
 
 if __name__ == "__main__":
     sol = Solution()
@@ -60,4 +62,4 @@ if __name__ == "__main__":
     # print(sol.minTimeToVisitAllPoints([[1,1],[3,4],[-1,0]]))
     # print(sol.diagonalSum([[1,2,3],[4,5,6],[7,8,9]]))
     # print(sol.destCity([["London","New York"],["New York","Lima"],["Lima","Sao Paulo"]]))
-    
+    # print(sol.maxProduct([1,5,4,5]))
