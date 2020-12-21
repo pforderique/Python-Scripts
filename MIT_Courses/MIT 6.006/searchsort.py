@@ -31,8 +31,6 @@ def binarysearch(target: object, arr: list) -> bool:
 def insertionsort(arr: list) -> None:
     """returns original list but sorted. 
     O(n^2) time, O(1) space
-    >>> insertionsort([])
-    []
     """
     # if empty, just go ahead and return empty list
     if arr == []: return arr
@@ -51,7 +49,3 @@ def insertionsort(arr: list) -> None:
 if __name__ == "__main__":
     from doctest import testmod
     testmod()
-    
-    a1 = [4,8,2]
-    insertionsort(a1)
-    print(a1)
