@@ -33,7 +33,7 @@ def insertionsort(arr: list) -> None:
     O(n^2) time, O(1) space
     """
     # if empty, just go ahead and return empty list
-    if arr == []: return arr
+    if arr == []: return None
     # else, we iterate through elems of the list - for every element, 
     for idx in range(0, len(arr)):
         # insert it in our sorted array by swapping until no more swaps needed, going backwards
@@ -46,20 +46,39 @@ def insertionsort(arr: list) -> None:
             # if its greater or equal to previous, then leave it there
             else: break
         
-def mergesort(arr: list) -> None:
+def mergesort(arr: list) -> list:
     """mutates list by performing merge sort on it"""
-    pass
+    # check if empty or contains only one element first
+    if len(arr) == 0 or len(arr) == 1: return arr
+    # else mutate the list
+    mid = len(arr)//2
+    left = mergesort(arr[:mid])
+    right = mergesort(arr[mid:])
+    return merge(left, right)
+    
 
 def merge(arr1: list, arr2: list) -> list:
     """merges 2 lists using two finger algorithm"""
-    pass
-    
+    res = []
+    while len(arr1) > 0 and len(arr2) > 0:
+        if arr1[0] < arr2[0]:
+            res.append(arr1[0])
+            del arr1[0]
+        else:
+            res.append(arr2[0])
+            del arr2[0]
+    res.extend(arr1)
+    res.extend(arr2)
+    return res
+ 
 if __name__ == "__main__":
     from doctest import testmod
     testmod()
     
-    # a1 = [66, 36, 2, 66, 34, 34, 82, 82, 38, 39, 97, 19, 99, 27, 59, 79, 42, 57, 96, 
-    # 77, 26, 66, 59, 66, 50, 30, 86, 60, 4, 65, 23, 28, 39, 42, 55, 10, 43, 50, 66, 9]
-    a1 = [4,8,2]
-    insertionsort(a1)
-    print(a1)
+    a1 = [66, 36, 2, 66, 34, 34, 82, 82, 38, 39, 97, 19, 99, 27, 59, 79, 42, 57, 96, 
+    77, 26, 66, 59, 66, 50, 30, 86, 60, 4, 65, 23, 28, 39, 42, 55, 10, 43, 50, 66, 9]
+    # a1 = [4,8,2,6,6]
+    print("original:", a1)
+    new = mergesort(a1)
+    # new = merge([4,8], [2,6,6])
+    print("sorted:", new)
