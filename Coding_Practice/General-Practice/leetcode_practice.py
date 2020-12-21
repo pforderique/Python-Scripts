@@ -38,9 +38,26 @@ class Solution:
             return res
         return res - mat[side//2][side//2] #124 ms -- while loop is actually a bit slower than for in python!
 
+    def destCity(self, paths) -> str:
+        record = {}
+        for pair in paths:
+            start = pair[0]
+            stop = pair[1]
+            record[start] = stop
+        for city in record.values():
+            if city not in record.keys():
+                return city
+        return None
+
+        # better solution? - use sets!
+        # A, B = map(set, zip(*paths))
+        # return (B - A).pop()
+
 
 if __name__ == "__main__":
     sol = Solution()
     # print(sol.findNumbers([12,345,2,6,7896]))
     # print(sol.minTimeToVisitAllPoints([[1,1],[3,4],[-1,0]]))
     # print(sol.diagonalSum([[1,2,3],[4,5,6],[7,8,9]]))
+    # print(sol.destCity([["London","New York"],["New York","Lima"],["Lima","Sao Paulo"]]))
+    
