@@ -6,7 +6,8 @@
 ############          SEARCHES          ############
 ####################################################
 def binarysearch(target: object, arr: list) -> bool:
-    """input a list and return True if target in arr. Assumes arr is sorted ascending
+    """input a list and return True if target in arr. Assumes arr is sorted ascending. 
+    O(lgn) time, O(1) space?
     >>> binarysearch(10, [])
     False
     >>> binarysearch(3, [1,2,3])
@@ -28,15 +29,26 @@ def binarysearch(target: object, arr: list) -> bool:
 ############           SORTS           ############
 ###################################################
 def insertionsort(arr: list) -> None:
-    """returns original list but sorted
+    """returns original list but sorted. 
+    O(n^2) time, O(1) space
     >>> insertionsort([])
     []
     """
     # if empty, just go ahead and return empty list
     if arr == []: return arr
-    # else, we start the sorted list with the first element
-    # then we iterate through rest of the list - for every element left, 
-        # insert it in our sorted array by swapping until no more swaps needed
+    # else, we iterate through elems of the list - for every element, 
+    for idx in range(1, len(arr)):
+        # insert it in our sorted array by swapping until no more swaps needed, going backwards
+        for idx2 in range(idx-1, -1, -1):
+            if arr[idx] < arr[idx2]: 
+                # swap if greater and continue
+                arr[idx], arr[idx2] = arr[idx2], arr[idx]
+                continue
+            # if its greater or equal to previous, then leave it there
+            else: break
+               
+               
+
     
 
 if __name__ == "__main__":
