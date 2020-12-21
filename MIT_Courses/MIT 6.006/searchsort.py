@@ -37,20 +37,21 @@ def insertionsort(arr: list) -> None:
     # if empty, just go ahead and return empty list
     if arr == []: return arr
     # else, we iterate through elems of the list - for every element, 
-    for idx in range(1, len(arr)):
+    for idx in range(0, len(arr)):
         # insert it in our sorted array by swapping until no more swaps needed, going backwards
         for idx2 in range(idx-1, -1, -1):
             if arr[idx] < arr[idx2]: 
                 # swap if greater and continue
                 arr[idx], arr[idx2] = arr[idx2], arr[idx]
+                idx -= 1 # (no worries, this wont mess with actual counter)
                 continue
             # if its greater or equal to previous, then leave it there
             else: break
-               
-               
-
-    
-
+        
 if __name__ == "__main__":
-    import doctest
-    doctest.testmod()
+    from doctest import testmod
+    testmod()
+    
+    a1 = [4,8,2]
+    insertionsort(a1)
+    print(a1)
