@@ -1,4 +1,4 @@
-from typing import Counter
+from time import time
 
 
 class Solution:
@@ -86,6 +86,21 @@ class Solution:
 
         # AWESOME one-liner: return sorted(A, key=lambda x: x & 1)
 
+    def minWindow(self, s: str, t: str) -> str:
+        for char in set(t):
+            if char not in set(s):
+                return ""
+        l = len(t)
+        while True:
+            for i in range(l -1, len(s)):
+                charCount = 0
+                for char in set(t):
+                    if char in set(s[i-l+1:i+1]):
+                        charCount +=1 
+                if charCount == len(t): return s[i-l+1:i+1]
+            l += 1
+            if l > len(s): break
+
 if __name__ == "__main__":
     sol = Solution()
     # past testing:
@@ -95,4 +110,6 @@ if __name__ == "__main__":
         # print(sol.destCity([["London","New York"],["New York","Lima"],["Lima","Sao Paulo"]]))
         # print(sol.maxProduct([1,5,4,5]))
         # print(sol.countNegatives([[4,3,2,-1],[3,2,1,-1],[1,1,-1,-2],[-1,-1,-2,-3]]))
-    print(sol.sortArrayByParity([3,1,2,4]))
+        # print(sol.sortArrayByParity([3,1,2,4]))
+    import time
+    print(sol.minWindow("A", "T"))
