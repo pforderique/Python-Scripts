@@ -11,3 +11,8 @@ import sys
 sys.path.insert(1, 'C:/Users/fabri/OneDrive/Documents/myPythonCodes/RandomProjects/Searches and Sorts')
 import Searches as s 
 '''
+
+def test_commit():
+    return "This is for testing"
+
+print(test_commit())
