@@ -41,4 +41,17 @@ if __name__ == "__main__":
     print('-'*10)
     delete_node(ll, 2)
     print(ll)
+
+##############
+#   ADVICE   #
+##############
+
+# Runner Technique (aka second pointer technique)
+    # one fast pointer and one slow pointer to iterate through
+        # ex: a fast pointer that moves 2 at a time will reach the end
+        # when slow pointer is midway. Now you know mid-way node!
+
+# Having trouble solving a LL problem? try recursion my friend!
+    # Recursive Algos take at LEAST O(n) space 
+    # All recursive algos CAN be implemented iteratively, although be more complex
     
