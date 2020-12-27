@@ -17,12 +17,12 @@ class Node:
         n.next = end
     
     def __str__(self):
-        if self.next == None: rep = "Node data: {}\nNext Node: NONE\n".format(self.data)
-        else: rep = "Node data: {}\nNext Node: {}\n".format(self.data, self.next)
+        if self.next == None: rep = "Node data: {}\nNext Node: NONE".format(self.data)
+        else: rep = "Node data: {}\nNext Node: {}".format(self.data, self.next)
         return rep
 
 # outside user-defined functions
-def delete_node(self, head: Node, data: int) -> Node:
+def delete_node(head: Node, data: int) -> Node:
     if head == None: return None
     n = head
     if n.data == data: return head.next # moved head
@@ -36,7 +36,9 @@ def delete_node(self, head: Node, data: int) -> Node:
 if __name__ == "__main__":
     ll = Node(1)
     ll.append_to_tail(2)
-    n = ll
-    n = n.next
+    ll.append_to_tail(3)
     print(ll)
-    print(n)
+    print('-'*10)
+    delete_node(ll, 2)
+    print(ll)
+    
