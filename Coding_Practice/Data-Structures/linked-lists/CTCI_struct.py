@@ -22,14 +22,20 @@ class Node:
         return rep
 
 # outside user-defined functions
-def delete_node(self, head: Node, data) -> Node:
+def delete_node(self, head: Node, data: int) -> Node:
     if head == None: return None
     n = head
-
+    if n.data == data: return head.next # moved head
+    while n.next != None:
+        if n.next.data == data:
+            n.next = n.next.next
+            return head # head didn't change
+        n = n.next
+    return head # data not found
 
 if __name__ == "__main__":
-    ll = Node("Piero")
-    ll.append_to_tail("Fabrizzio")
+    ll = Node(1)
+    ll.append_to_tail(2)
     n = ll
     n = n.next
     print(ll)
