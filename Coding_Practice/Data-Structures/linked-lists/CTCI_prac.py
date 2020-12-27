@@ -60,9 +60,18 @@ def kth_to_last(head: Node, k: int) -> Node:
         counter += 1
     return curr
 
-def recursive_kthtolast(head: Node, k: int) -> Node:
-    ''' returns the kth to last node in single linked list - but spicy'''
-
+def kth_to_last2(head: Node, k: int) -> Node: # what if we don't know the length?
+    ''' returns the kth to last node in single linked list - using double pointer technique'''
+    p1 = p2 = head
+    # p2 will point to the node that is k nodes away from p2
+    for i in range(k): 
+        if p2 == None: raise ValueError("k value out of range")
+        p2 = p2.next
+    # iterate both until p2 hits the end of the list 
+    while p2.next != None:
+        p2 = p2.next
+        p1 = p1.next
+    return p1
 
 # Driver Code
 if __name__ == "__main__":
@@ -73,4 +82,4 @@ if __name__ == "__main__":
     ll.append_to_tail(8)
     print(ll)
     print("Length:", get_len(ll))
-    print(kth_to_last(ll, 1).data)
+    print(kth_to_last2(ll, 1).data)
