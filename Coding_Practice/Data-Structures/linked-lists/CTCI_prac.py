@@ -10,9 +10,13 @@ class Node:
             n = n.next
         n.next = end
     def __str__(self):
-        if self.next == None: rep = "Node data: {}\nNext Node: NONE".format(self.data)
-        else: rep = "Node data: {}\nNext Node: {}".format(self.data, self.next)
-        return rep
+        n = self
+        rep = "" + str(n.data)
+        while n.next != None:
+            rep += " -> " + str(n.next.data)
+            n = n.next
+        return rep + " -> NONE"
+        
 
 # outside user-defined functions
 def delete_node(head: Node, data: int) -> Node:
@@ -27,3 +31,20 @@ def delete_node(head: Node, data: int) -> Node:
     return head # data not found
 
 # PRACTICE PROBLEMS
+def remove_duplicates(head: Node) -> None:
+    if not head: return None # return if head not initialized
+    n = head
+    seen = set({n.data})
+    while(n.next != None):
+        if n.next.data in seen:
+            n.next = n.next.next
+        else:
+            seen.add(n.next.data)
+        n = n.next
+
+# Driver Code
+if __name__ == "__main__":
+    ll = Node(1)
+    ll.append_to_tail(2)
+    ll.append_to_tail(3)
+    print(ll)

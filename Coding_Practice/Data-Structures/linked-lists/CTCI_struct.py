@@ -17,9 +17,12 @@ class Node:
         n.next = end
     
     def __str__(self):
-        if self.next == None: rep = "Node data: {}\nNext Node: NONE".format(self.data)
-        else: rep = "Node data: {}\nNext Node: {}".format(self.data, self.next)
-        return rep
+        n = self
+        rep = "" + str(n.data)
+        while n.next != None:
+            rep += " -> " + str(n.next.data)
+            n = n.next
+        return rep + " -> NONE"
 
 # outside user-defined functions
 def delete_node(head: Node, data: int) -> Node:
