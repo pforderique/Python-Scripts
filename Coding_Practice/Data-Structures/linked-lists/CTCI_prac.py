@@ -89,17 +89,17 @@ def sum_lists(head1: Node, head2: Node) -> Node:
         n1 = n1.next
         n2 = n2.next
     # works, but not if we need to go one further digit OR what if we need to extend further? fix this later!
-    
+        # finish writing on paper - thinking about having 2 separate "end conditions" to check which one is None and then add the carryover bit!
     return res
         
 # Driver Code
 if __name__ == "__main__":
     ll = Node(1)
-    ll.append_to_tail(4)
+    ll.append_to_tail(5)
     ll.append_to_tail(3)
     print(ll)
     LL = Node(2)
     LL.append_to_tail(7)
     LL.append_to_tail(6)
     print(LL)
-    # print(sum_lists(ll, LL))
+    print(sum_lists(ll, LL))
