@@ -1,6 +1,3 @@
-from time import time
-
-
 class Solution:
     def findNumbers(self, nums) -> int:
         '''
@@ -100,6 +97,10 @@ class Solution:
                 if charCount == len(t): return s[i-l+1:i+1]
             l += 1
             if l > len(s): break
+
+    def intersection_naive(self, nums1, nums2):
+        setA, setB = set(nums1), set(nums2)
+        return list(setA.intersection(setB))
 
 if __name__ == "__main__":
     sol = Solution()
