@@ -73,7 +73,7 @@ def kth_to_last2(head: Node, k: int) -> Node: # what if we don't know the length
         p1 = p1.next
     return p1
 
-def sum_lists(head1: Node, head2: Node) -> Node:
+def sum_lists_err(head1: Node, head2: Node) -> Node:
     '''adds two nums represented by linked lists and outputs linked list result'''
     n1 = head1
     n2 = head2
@@ -91,7 +91,27 @@ def sum_lists(head1: Node, head2: Node) -> Node:
     # works, but not if we need to go one further digit OR what if we need to extend further? fix this later!
         # finish writing on paper - thinking about having 2 separate "end conditions" to check which one is None and then add the carryover bit!
     return res
-        
+
+def sum_lists(head1: Node, head2: Node) -> Node: # decided to rewrite 
+    res = Node() # dummy head
+    carry = 0
+    n1, n2 = head1, head2
+    while True:
+        if not(n1 or n2):
+            if carry == 1: res.append_to_tail(1)
+            break
+        Sum = carry
+        if n1: 
+            Sum += n1.data
+            n1 = n1.next
+        if n2: 
+            Sum += n2.data
+            n2 = n2.next
+        remainder = Sum % 10
+        carry = 1 if Sum > 9 else 0
+        res.append_to_tail(remainder)
+    return res.next # return the actual head, not the dummy one
+
 # Driver Code
 if __name__ == "__main__":
     ll = Node(1)
