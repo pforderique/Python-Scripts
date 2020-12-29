@@ -130,17 +130,48 @@ def isPalindrome(head: Node) -> Node:
         if seen != deque([]): seen.pop()
     return True
 
+def hasLoop_err(head: Node) -> Node: # no bueno
+    nodes = set()
+    n = head
 
+    while n:
+        if n not in nodes: 
+            nodes.add(n)
+            n = n.next
+        else: break
+    if n == None: return None
+    else:
+        v = head
+        while v != n:
+            v = v.next
+    return v
+
+def hasLoop(head: Node) -> Node:
+    fast = slow = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast: # Collision!
+            break
+
+    # check to see if loop terminated due to no loop
+    if fast == None or fast.next == None: return None
+
+    slow = head
+    while slow != fast:
+        slow = slow.next
+        fast = fast.next
+    return slow
 
 # Driver Code
 if __name__ == "__main__":
     ll = Node(1)
     ll.append_to_tail(5)
-    ll.append_to_tail(5)
     ll.append_to_tail(1)
+    ll.append_to_tail(2)
     ll.append_to_tail(7)
     print(ll)
-    print(isPalindrome(ll))
+    print(hasLoop(ll))
 
     # Sum lists testing
         # LL = Node(2)
