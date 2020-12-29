@@ -112,14 +112,39 @@ def sum_lists(head1: Node, head2: Node) -> Node: # decided to rewrite
         res.append_to_tail(remainder)
     return res.next # return the actual head, not the dummy one
 
+def isPalindrome(head: Node) -> Node:
+    from collections import deque
+    seen = deque([])
+    n = head
+
+    # run through left to right and record values
+    while n:
+        seen.append(n.data)
+        n = n.next
+
+    # compare first and last elements
+    while seen: 
+        if seen[0] != seen[-1]: return False
+        seen.popleft()
+        # only pop again if its not an empty deque
+        if seen != deque([]): seen.pop()
+    return True
+
+
+
 # Driver Code
 if __name__ == "__main__":
     ll = Node(1)
     ll.append_to_tail(5)
-    ll.append_to_tail(3)
+    ll.append_to_tail(5)
+    ll.append_to_tail(1)
+    ll.append_to_tail(7)
     print(ll)
-    LL = Node(2)
-    LL.append_to_tail(7)
-    LL.append_to_tail(6)
-    print(LL)
-    print(sum_lists(ll, LL))
+    print(isPalindrome(ll))
+
+    # Sum lists testing
+        # LL = Node(2)
+        # LL.append_to_tail(7)
+        # LL.append_to_tail(6)
+        # print(LL)
+        # # print(sum_lists(ll, LL))
