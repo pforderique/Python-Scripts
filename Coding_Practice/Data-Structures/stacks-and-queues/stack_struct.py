@@ -1,4 +1,5 @@
 # Stack Structure as outlined by CTCI
+# 12-30-2020
 
 # STACK (LIFO)
     # methods:
@@ -13,7 +14,7 @@
 
 class Stack:
     class StackNode():
-        def __init__(self, data) -> None:
+        def __init__(self, data=None) -> None:
             self.data = data
             self.next = None
 
