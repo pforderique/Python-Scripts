@@ -162,14 +162,14 @@ if __name__ == "__main__":
     # stack.push(4)
     # print("INPUT STACK:\n" + str(stack))
     plates = SetOfStacks(capacity=3)
-    plates.push("Plate 1")
-    plates.push("Plate 2")
-    plates.push("Plate 3")
-    plates.push("Plate 4")
-    plates.push("Plate 5")
-    plates.push("Plate 6")
-    plates.push("Plate 7")
-
+    # plates.push("Plate 1")
+    # plates.push("Plate 2")
+    # plates.push("Plate 3")
+    # plates.push("Plate 4")
+    # plates.push("Plate 5")
+    # plates.push("Plate 6")
+    # plates.push("Plate 7")
+    plates.pop()
     plates.printStacks()
 
 
