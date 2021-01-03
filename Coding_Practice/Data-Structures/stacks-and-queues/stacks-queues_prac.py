@@ -106,19 +106,22 @@ class SetOfStacks:
     DATA STRUCTURE: Set of Stacks
     Composed of:
         several stacks and should create a new stack once the previous one exceeds capacity
-        pop() and push() should behave identicall to that of a SINGLE stack
+        pop() and push() should behave identical to that of a SINGLE stack
     '''
     def __init__(self, capacity) -> None:
         self.stacks = Stack() # stack of stacks and their current space availability
         self.stacks.top = None
         self.capacity = capacity
+        self.length == 0 # for popAt(idx) method
 
     def push(self, item):
         """push onto stack. if capacity is reached, create a new stack"""
         if self.stacks.top == None: # if there are no stacks, start "new" stack of stacks
             self.stacks = Stack([Stack(item), 1])
+            self.length += 1
         elif self.stacks.peek()[1] == self.capacity: # add a new stack if last capacity reached
             self.stacks.push([Stack(item), 1]) 
+            self.length += 1
         else: # else, there is enough space to add to current top stack
             self.stacks.top.data[0].push(item)
             self.stacks.top.data[1] += 1 
@@ -133,8 +136,23 @@ class SetOfStacks:
 
         if self.stacks.top.data[1] == 0: # if stack is empty get rid of this stack completey
             self.stacks.top = self.stacks.top.next
+            self.length -= 1
 
         return value
+
+    def popAt(self, index: int):
+        """pops from a certain sub-stack. Removes sub stacks as they empty"""
+        # Assumptions:
+            # index is 0 indexed from bottom to top
+        # Pseudo Code:
+            # times = self.length - index - 1
+            # set dummy node to top of set of stacks
+            # iterate times times to that specific substack 
+            # pop from top
+        # Additional Considerations:
+            # if you have popped the whole substack, how can we "get rid" of this in the stack?
+            # this would be easier if we had implemented the stack of stacks as a list
+                # this way, we run a checker method O(N) that removes empty stacks
 
     def printStacks(self):
         print("*"*10)
@@ -162,7 +180,7 @@ if __name__ == "__main__":
     # stack.push(4)
     # print("INPUT STACK:\n" + str(stack))
     plates = SetOfStacks(capacity=3)
-    # plates.push("Plate 1")
+    plates.push("Plate 1")
     # plates.push("Plate 2")
     # plates.push("Plate 3")
     # plates.push("Plate 4")
