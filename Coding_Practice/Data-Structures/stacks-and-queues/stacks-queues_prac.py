@@ -51,8 +51,8 @@ class Queue:
         pass
 
     def __init__(self) -> None:
-        self.first = self.QueueNode()
-        self.last = self.QueueNode()
+        self.first = None # self.QueueNode()
+        self.last = None # self.QueueNode()
 
     def add(self, item):
         t = self.QueueNode(item)
@@ -74,6 +74,15 @@ class Queue:
     def peek(self):
         if self.first == None: raise self.NoSuchElementException
         return self.first.data
+
+    def __str__(self) -> str:
+        rep = ''
+        f = self.first
+        while f != None:
+            rep += str(f.data) + " -> "
+            f = f.next
+        rep += "None"
+        return rep
         
 # Practice
 def split_array(arr: list, divisions: int) -> list:
@@ -176,18 +185,8 @@ class SetOfStacks:
         return rep
 
 if __name__ == "__main__":
-    # stack = Stack(3)
-    # stack.push(4)
-    # print("INPUT STACK:\n" + str(stack))
-    plates = SetOfStacks(capacity=3)
-    plates.push("Plate 1")
-    # plates.push("Plate 2")
-    # plates.push("Plate 3")
-    # plates.push("Plate 4")
-    # plates.push("Plate 5")
-    # plates.push("Plate 6")
-    # plates.push("Plate 7")
-    plates.pop()
-    plates.printStacks()
-
+    queue = Queue()
+    queue.add("Piero")
+    queue.add("Fab")
+    print(queue)
 
