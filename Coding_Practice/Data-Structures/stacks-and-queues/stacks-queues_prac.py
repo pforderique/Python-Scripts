@@ -11,8 +11,8 @@ class Stack:
     class EmptyStackException(Exception):
         pass
     
-    def __init__(self, data=None) -> None:
-        self.top = self.StackNode(data=data)
+    def __init__(self) -> None:
+        self.top = None
 
     def pop(self):
         if self.top == None: raise self.EmptyStackException
@@ -184,9 +184,39 @@ class SetOfStacks:
         rep += '-'*5
         return rep
 
-if __name__ == "__main__":
-    queue = Queue()
-    queue.add("Piero")
-    queue.add("Fab")
-    print(queue)
+class MyQueue(Queue):
+    '''
+    DATA STRUCTURE: MyQueue
+    
+    Implements a queue using two stacks
+    '''
+    def __init__(self, stack: Stack) -> None:
+        if type(stack) != Stack: raise Stack.EmptyStackException
 
+        # build reverse temp stack
+        temp = Stack()
+        n = stack.top
+        while n:
+            temp.push(n.data)
+            n = n.next
+
+        # now you can pop in order to build queue
+        self.first = self.QueueNode(temp.pop())
+        n = self.first
+        while True:
+            try:
+                n.next = self.QueueNode(temp.pop())
+            except:
+                break
+            n = n.next
+        self.last = None        
+
+if __name__ == "__main__":
+    stack = Stack()
+    stack.push(3)
+    stack.push(4)
+    stack.push(5)
+    print(stack)
+
+    queue = MyQueue(stack=stack)
+    print(queue)
