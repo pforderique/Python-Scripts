@@ -211,12 +211,30 @@ class MyQueue(Queue):
             n = n.next
         self.last = None        
 
+# sorts a stack using another stack
+def sort_stack(stack: Stack):
+    r = Stack()
+
+    while not stack.isEmpty():
+        # insert each element in stack in sorted order into r
+        temp = stack.pop()
+        while not r.isEmpty() and r.peek() > temp:
+            stack.push(r.pop())
+        r.push(temp)
+
+    # copy elements from r back into stack
+    while not r.isEmpty():
+        stack.push(r.pop())
+
 if __name__ == "__main__":
     stack = Stack()
-    stack.push(3)
-    stack.push(4)
+    stack.push(7)
+    stack.push(2)
     stack.push(5)
     print(stack)
 
-    queue = MyQueue(stack=stack)
-    print(queue)
+    sort_stack(stack=stack)
+    print(stack)
+
+    # queue = MyQueue(stack=stack)
+    # print(queue)
