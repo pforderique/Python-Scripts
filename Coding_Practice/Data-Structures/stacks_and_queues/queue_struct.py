@@ -25,8 +25,8 @@ class Queue:
         pass
 
     def __init__(self) -> None:
-        self.first = self.QueueNode()
-        self.last = self.QueueNode()
+        self.first = None
+        self.last = None
 
     def add(self, item):
         t = self.QueueNode(item)
@@ -39,7 +39,7 @@ class Queue:
 
     def remove(self):
         if self.first == None: raise self.NoSuchElementException
-        data =  self.first.data
+        data = self.first.data
         self.first = self.first.next
         if self.first == None:
             self.last = None
@@ -51,3 +51,22 @@ class Queue:
 
     def isEmpty(self):
         return self.first == None
+
+    def __str__(self) -> str:
+        # rep =  'first in queue: {}\nlast in queue: {}'.format(self.first.data, self.last.data)
+        # return rep
+        rep = ''
+        n = self.first
+        while n:
+            rep += str(n.data) +' -> '
+            n = n.next
+        rep += 'None'
+        return rep
+
+# Testing
+if __name__ == "__main__":
+    queue = Queue()
+    queue.add(5)
+    queue.add(9)
+    queue.add(19)
+    print(queue)

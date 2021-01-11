@@ -21,8 +21,53 @@ class Node:
         rep = 'Data: ' + str(self.data)
         return rep
 
-def visit(node:Node):
-    print(node)
+class Queue:
+    class QueueNode:
+        def __init__(self, data=None) -> None:
+            self.data = data
+            self.next = None
+
+    class NoSuchElementException(Exception):
+        pass
+
+    def __init__(self) -> None:
+        self.first = None
+        self.last = None
+
+    def add(self, item):
+        t = self.QueueNode(item)
+        if self.last != None: 
+            self.last.next = t
+
+        self.last = t
+        if self.first == None:
+            self.first = self.last
+
+    def remove(self):
+        if self.first == None: raise self.NoSuchElementException
+        data = self.first.data
+        self.first = self.first.next
+        if self.first == None:
+            self.last = None
+        return data
+    
+    def peek(self):
+        if self.first == None: raise self.NoSuchElementException
+        return self.first.data
+
+    def isEmpty(self):
+        return self.first == None
+
+    def __str__(self) -> str:
+        # rep =  'first in queue: {}\nlast in queue: {}'.format(self.first.data, self.last.data)
+        # return rep
+        rep = ''
+        n = self.first
+        while n:
+            rep += str(n.data) +' -> '
+            n = n.next
+        rep += 'None'
+        return rep
 
 # DFS
 def DFS(root:Node):
@@ -33,25 +78,31 @@ def DFS(root:Node):
         if node.visited == False:
             DFS(node)
 
-# Driver Code
-if __name__ == "__main__":
-    # root node picture:
-        #          1
-        #       /     \
-        #      2       3
-        #     / \     / \
-        #    4   5   6   7
-    root = Node(1, [
-        Node(2, [
-            Node(4),
-            Node(5)
-        ]), 
-        Node(3, [
-            Node(6),
-            Node(7)
-        ])
-        ])
-    # graph wrapper class (only if it contains disconnected components)
-    graph = Graph(nodes=[root])
+# BFS - NOT RECURSIVE! Use a QUEUE!!! (iterative solution = best solution)
+def BFS():
+    queue = Queue()
 
-    DFS(root)
+# Driver Code:
+# --------------------------------------------
+# root node picture:
+    #          1
+    #       /  |  \
+    #      2   0   3
+    #     / \     / \
+    #    4   5   6   7
+root = Node(1, [
+    Node(2, [
+        Node(4),
+        Node(5)
+    ]), 
+    Node(0),
+    Node(3, [
+        Node(6),
+        Node(7)
+    ])
+    ])
+# graph wrapper class (only if it contains disconnected components)
+graph = Graph(nodes=[root])
+
+if __name__ == "__main__":
+    # DFS(root)
