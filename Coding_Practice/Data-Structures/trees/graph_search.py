@@ -35,6 +35,12 @@ def DFS(root:Node):
 
 # Driver Code
 if __name__ == "__main__":
+    # root node picture:
+        #          1
+        #       /     \
+        #      2       3
+        #     / \     / \
+        #    4   5   6   7
     root = Node(1, [
         Node(2, [
             Node(4),
@@ -45,4 +51,7 @@ if __name__ == "__main__":
             Node(7)
         ])
         ])
+    # graph wrapper class (only if it contains disconnected components)
+    graph = Graph(nodes=[root])
+
     DFS(root)
