@@ -1,5 +1,3 @@
 {
     "python.pythonPath": "C:\\Users\\fabri\\miniconda3\\python.exe",
-    // Whether git is enabled.
-    "git.enabled": false,
 }
