@@ -35,7 +35,7 @@ class TreeNode():
     def __str__(self) -> str:
         return str(self.data)
 
-# 4.1 Route Between Nodes : Design Algo that returns True iff there exists a path from S->E
+# 4.1 Route Between Nodes : Design Algo that returns True iff there exists a path from S->E - CORRECT!
 # I wil be using BFS for path finding
 from collections import deque
 def existsPath(S:Node, E:Node) -> bool:
@@ -56,7 +56,7 @@ def existsPath(S:Node, E:Node) -> bool:
     # if we are done BFSsing without encountering E, then there is no path S->E
     return False
 
-# 4.2 Minimal Tree : given sorted increasing arr, create a Binary Search Tree with min height
+# 4.2 Minimal Tree : given sorted increasing arr, create a Binary Search Tree with min height - CORRECT!
 def treeify(arr:list) -> TreeNode:
     # Bases Cases
     if len(arr) == 0: return None
