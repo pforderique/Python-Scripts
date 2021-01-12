@@ -69,7 +69,10 @@ class Queue:
         rep += 'None'
         return rep
 
-# DFS
+def visit(node:Node):
+    print(node)
+
+# DFS - like pre order traversal! Root -> left -> right
 def DFS(root:Node):
     if root == None: return
     visit(root)
@@ -79,8 +82,18 @@ def DFS(root:Node):
             DFS(node)
 
 # BFS - NOT RECURSIVE! Use a QUEUE!!! (iterative solution = best solution)
-def BFS():
+def BFS(root:Node):
     queue = Queue()
+    root.visited = True
+    queue.add(root) # add to the end of queue
+
+    while not queue.isEmpty():
+        r = queue.remove() # remove tree node from front of queue
+        visit(r)
+        for node in r.adjacent:
+            if node.visited == False:
+                node.visited = True
+                queue.add(node)
 
 # Driver Code:
 # --------------------------------------------
@@ -105,4 +118,4 @@ root = Node(1, [
 graph = Graph(nodes=[root])
 
 if __name__ == "__main__":
-    # DFS(root)
+    BFS(root)
