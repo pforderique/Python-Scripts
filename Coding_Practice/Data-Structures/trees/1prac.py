@@ -12,7 +12,7 @@ class Node:
     def __str__(self) -> str:
         return str(self.data)
 
-class TreeNode():
+class TreeNode:
     def __init__(self, data) -> None:
         self.data = data
         self.left = None
@@ -34,6 +34,26 @@ class TreeNode():
 
     def __str__(self) -> str:
         return str(self.data)
+
+class LinkedListNode:
+    def __init__(self, data) -> None:
+        self.data = data
+        self.next = None
+
+    def append_to_tail(self, data):
+        end = LinkedListNode(data)
+        n = self
+        while(n.next != None):
+            n = n.next
+        n.next = end
+
+    def __str__(self):
+        n = self
+        rep = "" + str(n.data)
+        while n.next != None:
+            rep += " -> " + str(n.next.data)
+            n = n.next
+        return rep + " -> NONE"
 
 # 4.1 Route Between Nodes : Design Algo that returns True iff there exists a path from S->E - CORRECT!
 # I wil be using BFS for path finding
@@ -69,6 +89,35 @@ def treeify(arr:list) -> TreeNode:
     # now return the root node
     return root
 
+# 4.3 List of Depths : Given BT, design algo that creates a linked list of all the nodes at each depth
+# ex: if tree has depth d, output should be d linked lists
+def ll_depths(root:TreeNode) -> list:
+    '''takes in root from tree and returns list of linked lists'''
+    # initialize our queue, result, and temporary level head
+    queue = deque([])
+    queue.append(root)
+    result = [LinkedListNode(root)]
+    head = LinkedListNode(None)
+    # counter variables to help us know when we reached new level
+    counter = 1
+    exp = 2
+    # BFS with queue - keep track of level and append new linked lists
+    while len(queue) != 0:
+        node = queue.popleft()
+        if node.left:
+            queue.append(node.left)
+            head.append_to_tail(node.left)
+        if node.right:
+            queue.append(node.right)
+            head.append_to_tail(node.right)
+        # update our counter by 2 and check if we entered new level
+        counter += 2
+        if counter == 2**exp - 1:
+            result.append(head.next)
+            head = LinkedListNode(None)
+            exp += 1
+    return result
+
 # ____________________________________________________________________
 # Test Data:
 
@@ -78,13 +127,15 @@ def treeify(arr:list) -> TreeNode:
 # E = Node("E")
 # S = Node("S", [Node("x", [Node("y", [E])]), Node("andre")])
 
-# BST:
+# BST: - my function produced better BST - left to right!
     #      4
     #     / \
     #    2   9
     #   /   / \
     #  1   4   11
+# testNode = TreeNode(0)
 n1 = TreeNode(1)
+# n1.left = testNode
 n2 = TreeNode(4)
 n3 = TreeNode(11)
 n4 = TreeNode(2)
@@ -95,9 +146,11 @@ n5.right = n3
 root = TreeNode(4)
 root.left = n4
 root.right = n5
-arr = [1,2,4,4,9,11]
 
+# arr = [1,2,4,4,9,11]
+
+# Driver
 if __name__ == "__main__":
-    root = treeify(arr=arr)
-    root.print_tree()
-    
+    depth_lists = ll_depths(root)
+    for linked_list in depth_lists:
+        print(linked_list)
