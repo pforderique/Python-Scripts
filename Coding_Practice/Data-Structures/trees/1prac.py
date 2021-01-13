@@ -125,7 +125,7 @@ def isBalanced(root:TreeNode) -> bool:
 
     # else check subtrees
     flag = get_height(root=root)
-    return flag
+    return bool(flag)
 
 def get_height(root:TreeNode):
     if root is None: return 0 
@@ -140,8 +140,8 @@ def get_height(root:TreeNode):
     # get root's height by the max of of its subtree heights plus one
     height = max(left_hieght, right_height) + 1
 
-    # check if root is "missing" a subtree - if so, it is unbalanced
-    if height > 1 and not (root.right and root.left): return False
+    # check if root is at least 3 levels high and is "missing" a subtree - if so, it is unbalanced
+    if height > 2 and not (root.right and root.left): return False
     else: return height
 
 # ____________________________________________________________________
@@ -158,24 +158,27 @@ def get_height(root:TreeNode):
     #     / \
     #    2   9
     #   /   / \
-    #  1   4   11
-# testNode = TreeNode(0)
-n1 = TreeNode(1)
-# n1.left = testNode
-n2 = TreeNode(4)
-n3 = TreeNode(11)
-n4 = TreeNode(2)
-n4.left = n1
-n5 = TreeNode(9)
-n5.left = n2
-n5.right = n3
-root = TreeNode(4)
-root.left = n4
-root.right = n5
+    #  1   5   11
+def init_test_tree() -> TreeNode:
+    # testNode = TreeNode(0)
+    n1 = TreeNode(1)
+    # n1.left = testNode
+    n2 = TreeNode(5)
+    n3 = TreeNode(11)
+    n4 = TreeNode(2)
+    n4.left = n1
+    n5 = TreeNode(9)
+    n5.left = n2
+    n5.right = n3
+    root = TreeNode(4)
+    root.left = n4
+    root.right = n5
+    return root
 
 # arr = [1,2,4,4,9,11]
 
 # Driver
 if __name__ == "__main__":
+    root = init_test_tree()
     res = isBalanced(root=root)
     print(res)
