@@ -118,6 +118,32 @@ def ll_depths(root:TreeNode) -> list:
             exp += 1
     return result
 
+# 4.4 CheckBalanceed : Given BT, return True iff BT is not uneven by more than one level 
+def isBalanced(root:TreeNode) -> bool:
+    # check if root is a single leaf node
+    if not root.left and not root.right: return True
+
+    # else check subtrees
+    flag = get_height(root=root)
+    return flag
+
+def get_height(root:TreeNode):
+    if root is None: return 0 
+
+    # else calculate subtree heights and return False if algo finds them to be unbalanced
+    left_hieght = get_height(root.left)
+    if left_hieght is False: return False
+
+    right_height = get_height(root.right)
+    if right_height is False: return False
+    
+    # get root's height by the max of of its subtree heights plus one
+    height = max(left_hieght, right_height) + 1
+
+    # check if root is "missing" a subtree - if so, it is unbalanced
+    if height > 1 and not (root.right and root.left): return False
+    else: return height
+
 # ____________________________________________________________________
 # Test Data:
 
@@ -151,6 +177,5 @@ root.right = n5
 
 # Driver
 if __name__ == "__main__":
-    depth_lists = ll_depths(root)
-    for linked_list in depth_lists:
-        print(linked_list)
+    res = isBalanced(root=root)
+    print(res)
