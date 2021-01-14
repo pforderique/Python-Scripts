@@ -144,6 +144,29 @@ def get_height(root:TreeNode):
     if height > 2 and not (root.right and root.left): return False
     else: return height
 
+# 4.5 Validate BST : Given BT, return True iff it is a BST
+def isBST(root:TreeNode):
+    arr = []
+
+    # in order traversal stores BST in ascending order
+    def in_order_traversal(root:TreeNode):
+        if root:
+            in_order_traversal(root.left)
+            arr.append(root.data)
+            in_order_traversal(root.right)
+    in_order_traversal(root)
+
+    # return True if arr is in ascending order
+    def isSorted(arr:list):
+        prev = arr[0]
+        for elem in arr:
+            if elem < prev: 
+                return False
+            prev = elem
+        return True
+
+    return isSorted(arr)
+
 # ____________________________________________________________________
 # Test Data:
 
@@ -162,11 +185,11 @@ def get_height(root:TreeNode):
 def init_test_tree() -> TreeNode:
     # testNode = TreeNode(0)
     n1 = TreeNode(1)
-    # n1.left = testNode
     n2 = TreeNode(5)
     n3 = TreeNode(11)
     n4 = TreeNode(2)
     n4.left = n1
+    # n4.right = testNode
     n5 = TreeNode(9)
     n5.left = n2
     n5.right = n3
@@ -180,5 +203,4 @@ def init_test_tree() -> TreeNode:
 # Driver
 if __name__ == "__main__":
     root = init_test_tree()
-    res = isBalanced(root=root)
-    print(res)
+    print(isBST(root=root))
