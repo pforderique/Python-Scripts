@@ -201,6 +201,25 @@ def create_build_order(projects:list, dependencies:list) -> list:
     if projects_left: build_order.extend(projects_left)
     return build_order
 
+# 4.8 First Common Ancestor : Return the node that is the first common ancestor of p and q
+def get_first_common_ancestor(root:TreeNode, p:TreeNode, q:TreeNode) -> TreeNode:
+    # returns true if p is a descendant of the root node
+    def isDescendant(root:TreeNode, p:TreeNode) -> bool:
+        if root:
+            if p == root: return True
+            return isDescendant(root.left, p) or isDescendant(root.right, p)
+        return False
+    # find nearest ancestor
+    if isDescendant(root, p) and isDescendant(root, q):
+        if root.left and isDescendant(root.left, p) and isDescendant(root.left, q):
+            a = get_first_common_ancestor(root.left, p, q)
+            if a: return a
+        if root.right and isDescendant(root.right, p) and isDescendant(root.right, q):
+            b = get_first_common_ancestor(root.right, p, q)
+            if b: return b
+        return root
+    return None
+
 # ____________________________________________________________________
 # Test Data:
 
@@ -216,21 +235,21 @@ def create_build_order(projects:list, dependencies:list) -> list:
     #    2   9
     #   /   / \
     #  1   5   11
-def init_test_tree() -> TreeNode:
-    # testNode = TreeNode(0)
-    n1 = TreeNode(1)
-    n2 = TreeNode(5)
-    n3 = TreeNode(11)
-    n4 = TreeNode(2)
-    n4.left = n1
-    # n4.right = testNode
-    n5 = TreeNode(9)
-    n5.left = n2
-    n5.right = n3
-    root = TreeNode(4)
-    root.left = n4
-    root.right = n5
-    return root
+# def init_test_tree() -> TreeNode:
+# testNode = TreeNode(0)
+n1 = TreeNode(1)
+n2 = TreeNode(5)
+n3 = TreeNode(11)
+n4 = TreeNode(2)
+n4.left = n1
+# n4.right = testNode
+n5 = TreeNode(9)
+n5.left = n2
+n5.right = n3
+root = TreeNode(4)
+root.left = n4
+root.right = n5
+    # return root
 
 def init_projects_and_dependencies():
     return ['a', 'b', 'c', 'd', 'e', 'f'], [('a','d'), ('f','b'), ('b','d'), ('f','a'), ('d','c')]
@@ -240,5 +259,6 @@ def init_projects_and_dependencies():
 # Driver
 if __name__ == "__main__":
     # root = init_test_tree()
-    projects_list, dependencies_list = init_projects_and_dependencies()
-    print(create_build_order(projects=projects_list, dependencies=dependencies_list))
+    print(get_first_common_ancestor(root, n2, n1))
+    # projects_list, dependencies_list = init_projects_and_dependencies()
+    # print(create_build_order(projects=projects_list, dependencies=dependencies_list))
