@@ -167,6 +167,40 @@ def isBST(root:TreeNode):
 
     return isSorted(arr)
 
+# 4.7 Build Order : Given projects and dependencies list, find valid build order
+def create_build_order(projects:list, dependencies:list) -> list:
+    projects_left = projects[:]
+    dependencies_left = dependencies[:]
+    build_order = []
+    # error class
+    class LoopError(Exception):
+        pass
+    # helper function
+    def create_build():
+        if not dependencies_left: return # base case if no more dependencies left
+        # else get the firsts and seconds
+        firsts = set()
+        seconds = set()
+        for (first, second) in dependencies_left:
+            firsts.add(first)
+            seconds.add(second)
+        # raise error if loop
+        heads = firsts - seconds
+        if not heads: raise LoopError('DAG not possible')
+        # else add all heads to build order and remove them from lists
+        for head in heads:
+            build_order.append(head)
+            projects_left.remove(head)
+            for tup in dependencies_left:
+                if tup[0] == head:
+                    dependencies_left.remove(tup)
+        # keep filling in build order until we have processed all
+        create_build()
+    # after call, extend whatever projects are left (they wont have dependencies!)
+    create_build()
+    if projects_left: build_order.extend(projects_left)
+    return build_order
+
 # ____________________________________________________________________
 # Test Data:
 
@@ -198,9 +232,13 @@ def init_test_tree() -> TreeNode:
     root.right = n5
     return root
 
+def init_projects_and_dependencies():
+    return ['a', 'b', 'c', 'd', 'e', 'f'], [('a','d'), ('f','b'), ('b','d'), ('f','a'), ('d','c')]
+
 # arr = [1,2,4,4,9,11]
 
 # Driver
 if __name__ == "__main__":
-    root = init_test_tree()
-    print(isBST(root=root))
+    # root = init_test_tree()
+    projects_list, dependencies_list = init_projects_and_dependencies()
+    print(create_build_order(projects=projects_list, dependencies=dependencies_list))
