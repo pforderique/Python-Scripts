@@ -248,17 +248,42 @@ class BSTNode:
             if self.right is None: self.right = node
             else: self.right.insert(node)
         
-    def delete(self):
-        pass
+    def delete(self, node):
+        queue = deque()
+        queue.append(self)
+        while queue:
+            n = queue.popleft()
+            if n == node:
+                n = None
+                break
+            if node.left: queue.append(node.left)
+            if node.right: queue.append(node.right)
 
     def find(self, node):
-        pass
+        queue = deque()
+        queue.append(self)
+        while queue:
+            n = queue.popleft()
+            if n == node:
+                return True
+            if node.left: queue.append(node.left)
+            if node.right: queue.append(node.right)
+        return False
 
     def get_random_node(self):
         pass
 
     def __str__(self) -> str:
         return str(self.data)
+
+def printTree(root:BSTNode):
+    queue = deque()
+    queue.append(root)
+    while len(queue) != 0:
+        node = queue.popleft()
+        print(node)
+        if node.left: queue.append(node.left)
+        if node.right: queue.append(node.right)
 
 # 4.12 Paths with Sum : Given BT containing ints, design algo to count number of paths 
 # that sum to a given value. Path does NOT have to start or end at the root or leaf,
@@ -306,4 +331,10 @@ if __name__ == "__main__":
     # print(get_first_common_ancestor(root, n2, n1))
     # projects_list, dependencies_list = init_projects_and_dependencies()
     # print(create_build_order(projects=projects_list, dependencies=dependencies_list))
-    pass
+    root = BSTNode(4)
+    root.insert(BSTNode(2))
+    root.insert(BSTNode(1))
+    root.insert(BSTNode(9))
+    root.insert(BSTNode(5))
+    root.insert(BSTNode(11))
+    printTree(root)
