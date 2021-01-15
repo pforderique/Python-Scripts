@@ -298,6 +298,60 @@ def printTree(root:BSTNode):
 # 4.12 Paths with Sum : Given BT containing ints, design algo to count number of paths 
 # that sum to a given value. Path does NOT have to start or end at the root or leaf,
 # you can only travel downwards
+def brute_force_count_paths_with_sum(root:TreeNode, target:int):
+    if root == None: return 0
+
+    # count paths with sum starting at root
+    pathsFromRoot = count_paths_with_sum_from_node(root, target, 0)
+
+    # count them from left and right subtrees
+    pathsFromLeft = brute_force_count_paths_with_sum(root.left, target)
+    pathsFromRight = brute_force_count_paths_with_sum(root.right, target)
+
+    # return total path
+    return pathsFromRoot + pathsFromLeft + pathsFromRight
+
+def count_paths_with_sum_from_node(node:TreeNode, target:int, currentSum:int):
+    if node == None: return 0
+
+    currentSum += node.data
+
+    totalPaths = 0 
+    if currentSum == target: totalPaths+=1 # path was found
+
+    totalPaths += count_paths_with_sum_from_node(node.left, target, currentSum)
+    totalPaths += count_paths_with_sum_from_node(node.right, target, currentSum)
+    return totalPaths
+
+# Optimized Solution:
+def count_paths_with_sum(root:TreeNode, target:int):
+    return count_paths_with_sum_helper(root, target, 0, dict())
+
+def count_paths_with_sum_helper(node:TreeNode, target:int, runningSum:int, pathCount:dict):
+    if node == None: return 0 # base case
+
+    # count paths with sum ending at the current node
+    runningSum += node.data
+    sum = runningSum - target
+    totalPaths = pathCount.get(sum, 0) # either return pathCount for that sum or default to 0
+
+    # if runningSum equals targetSum, then one additional path starts at the root.
+    # add in this path
+    if runningSum == target: totalPaths+=1
+
+    # increment pathcount, recurse, then decrement path count
+    increment_hash_table(pathCount, runningSum, 1)
+    totalPaths += count_paths_with_sum_helper(node.left, target, runningSum, pathCount)
+    totalPaths += count_paths_with_sum_helper(node.right, target, runningSum, pathCount)
+    increment_hash_table(pathCount, runningSum, -1) # decrement path count
+
+    return totalPaths
+    
+def increment_hash_table(hashTable:dict, key:int, delta:int):
+    newCount = hashTable.get(key, 0) + delta
+    # remove when zero to reduce space usage
+    if newCount == 0: del hashTable[key]
+    else: hashTable[key] = newCount
 
 # ____________________________________________________________________
 # Test Data:
@@ -349,3 +403,4 @@ if __name__ == "__main__":
     root.insert(BSTNode(11))
     printTree(root)
     print(f'Random Choice: {root.get_random_node()}')
+    print(count_paths_with_sum(root, 7))
