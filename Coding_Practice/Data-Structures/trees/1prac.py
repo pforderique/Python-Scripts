@@ -58,6 +58,7 @@ class LinkedListNode:
 # 4.1 Route Between Nodes : Design Algo that returns True iff there exists a path from S->E - CORRECT!
 # I wil be using BFS for path finding
 from collections import deque
+from random import choice, randint
 def existsPath(S:Node, E:Node) -> bool:
     # init queue and append this root node
     queue = deque([])
@@ -237,16 +238,20 @@ class BSTNode:
         self.data = data
         self.left = None
         self.right = None
+        self.all_descendants = [self]
+        self.choices = [0]
     
     def insert(self, node):
         if node.data <= self.data:
             # insert it to the left if nothing is there 
             if self.left is None: self.left = node
             else: self.left.insert(node)
-        # else the data is larger so go on to the right
         else: 
+            # else the data is larger so go on to the right
             if self.right is None: self.right = node
             else: self.right.insert(node)
+        self.all_descendants.append(node)
+        self.choices.append(0)
         
     def delete(self, node):
         queue = deque()
@@ -254,10 +259,11 @@ class BSTNode:
         while queue:
             n = queue.popleft()
             if n == node:
+                self.all_descendants.remove(n)
                 n = None
                 break
-            if node.left: queue.append(node.left)
-            if node.right: queue.append(node.right)
+            if n.left: queue.append(n.left)
+            if n.right: queue.append(n.right)
 
     def find(self, node):
         queue = deque()
@@ -270,8 +276,12 @@ class BSTNode:
             if node.right: queue.append(node.right)
         return False
 
+    # Slow Working. Better Solution is to keep track of sizes and use that to
+    # calculate probability of moving right or left 
     def get_random_node(self):
-        pass
+        rand = randint(0, len(self.all_descendants) - 1)
+        self.choices[rand]+=1
+        return self.all_descendants[rand]
 
     def __str__(self) -> str:
         return str(self.data)
@@ -338,3 +348,4 @@ if __name__ == "__main__":
     root.insert(BSTNode(5))
     root.insert(BSTNode(11))
     printTree(root)
+    print(f'Random Choice: {root.get_random_node()}')
