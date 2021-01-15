@@ -220,6 +220,50 @@ def get_first_common_ancestor(root:TreeNode, p:TreeNode, q:TreeNode) -> TreeNode
         return root
     return None
 
+# 4.10 Check Subtrees : Return True if T2 is a subtree of T1 where T1 >> T2
+def isSubtree(T1:TreeNode, T2:TreeNode) -> bool:
+    queue = deque()
+    queue.append(T1)
+    while len(queue) != 0:
+        node = queue.popleft()
+        if node == T2: return True
+        if node.left: queue.append(node.left)
+        if node.right: queue.append(node.right)
+    return False
+
+# 4.11 Random Node : Implement BST class with insert, find, delete, and randomNode()
+class BSTNode:
+    def __init__(self, data) -> None:
+        self.data = data
+        self.left = None
+        self.right = None
+    
+    def insert(self, node):
+        if node.data <= self.data:
+            # insert it to the left if nothing is there 
+            if self.left is None: self.left = node
+            else: self.left.insert(node)
+        # else the data is larger so go on to the right
+        else: 
+            if self.right is None: self.right = node
+            else: self.right.insert(node)
+        
+    def delete(self):
+        pass
+
+    def find(self, node):
+        pass
+
+    def get_random_node(self):
+        pass
+
+    def __str__(self) -> str:
+        return str(self.data)
+
+# 4.12 Paths with Sum : Given BT containing ints, design algo to count number of paths 
+# that sum to a given value. Path does NOT have to start or end at the root or leaf,
+# you can only travel downwards
+
 # ____________________________________________________________________
 # Test Data:
 
@@ -235,21 +279,21 @@ def get_first_common_ancestor(root:TreeNode, p:TreeNode, q:TreeNode) -> TreeNode
     #    2   9
     #   /   / \
     #  1   5   11
-# def init_test_tree() -> TreeNode:
-# testNode = TreeNode(0)
-n1 = TreeNode(1)
-n2 = TreeNode(5)
-n3 = TreeNode(11)
-n4 = TreeNode(2)
-n4.left = n1
-# n4.right = testNode
-n5 = TreeNode(9)
-n5.left = n2
-n5.right = n3
-root = TreeNode(4)
-root.left = n4
-root.right = n5
-    # return root
+def init_test_tree() -> TreeNode:
+    testNode = TreeNode(0)
+    n1 = TreeNode(1)
+    n2 = TreeNode(5)
+    n3 = TreeNode(11)
+    n4 = TreeNode(2)
+    n4.left = n1
+    # n4.right = testNode
+    n5 = TreeNode(9)
+    n5.left = n2
+    n5.right = n3
+    root = TreeNode(4)
+    root.left = n4
+    root.right = n5
+    return root
 
 def init_projects_and_dependencies():
     return ['a', 'b', 'c', 'd', 'e', 'f'], [('a','d'), ('f','b'), ('b','d'), ('f','a'), ('d','c')]
@@ -259,6 +303,7 @@ def init_projects_and_dependencies():
 # Driver
 if __name__ == "__main__":
     # root = init_test_tree()
-    print(get_first_common_ancestor(root, n2, n1))
+    # print(get_first_common_ancestor(root, n2, n1))
     # projects_list, dependencies_list = init_projects_and_dependencies()
     # print(create_build_order(projects=projects_list, dependencies=dependencies_list))
+    pass
