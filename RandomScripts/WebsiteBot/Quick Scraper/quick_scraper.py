@@ -20,4 +20,14 @@ design_methods = []
 # create web driver and navigate to website you need
 driver = webdriver.Chrome(ChromeDriverManager().install())
 driver.get(WEBSITE)
+content = driver.page_source
 
+# the parser checks for the html within specified class
+soup = BeautifulSoup(content, features="html.parser")
+
+for obj in soup.find_all(attrs={'class':"dp-pattern-title"}):
+    design_methods.append(obj.text)
+    # print(a.text)
+
+driver.quit()
+print(design_methods)
