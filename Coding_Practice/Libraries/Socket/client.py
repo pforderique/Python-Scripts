@@ -19,5 +19,9 @@ def send(msg):
     client.send(message)
 
 if __name__ == "__main__":
-    send("hello there!")
+    msg = input("Enter Message: ")
+
+    while msg not in ["quit", "Quit", "Q", "q", "quit()"]:
+        send(msg)
+    
     send(DISCONNECT_MESSAGE)
