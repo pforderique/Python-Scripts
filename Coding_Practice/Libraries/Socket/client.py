@@ -18,10 +18,14 @@ def send(msg):
     client.send(send_length)
     client.send(message)
 
+    # ideally, we do same process as server to receive a message back...
+    print(client.recv(2048))
+
 if __name__ == "__main__":
     msg = input("Enter Message: ")
 
     while msg not in ["quit", "Quit", "Q", "q", "quit()"]:
         send(msg)
+        msg = input("Enter Message: ")
     
     send(DISCONNECT_MESSAGE)

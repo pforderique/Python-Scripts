@@ -36,3 +36,17 @@ Ex:
 This would wait one second, and THEN print "hey"
 But if we ran them on separate threads, then we could print "hey" AND wait at same time
 '''
+
+'''
+END OF TUTORIAL. Now what?
+
+HOW TO...
+    send messages from a client to other clients?
+        > record a list of messages sent from a client
+        > check if other clients have already seen them or not just now
+        > send messages to those clients from the server
+    
+    send an object instead of a string?
+        > import pickle and pickle a python object (serialize it)
+        > send pickle obj to server where it can decode it
+'''
