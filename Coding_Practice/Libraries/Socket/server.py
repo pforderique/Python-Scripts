@@ -24,14 +24,16 @@ def handle_client(conn, addr):
         # this is WHY it is important to run these in different threads -
         #   so we don't block other clients!
         msg_length = conn.recv(HEADER).decode(FORMAT) # decode msg from byte format to string
+        
+        # you get a blank message when you connect for the first time
+        if msg_length:
+            # use msg length to now accurately get how many bytes we are going to receive 
+            msg_length = int(msg_length)
+            msg = conn.recv(msg_length).decode(FORMAT)
+            if msg == DISCONNECT_MESSAGE:
+                connected = False
 
-        # use msg length to now accurately get how many bytes we are going to receive 
-        msg_length = int(msg_length)
-        msg = conn.recv(msg_length).decode(FORMAT)
-        if msg == DISCONNECT_MESSAGE:
-            connected = False
-
-        print(f"[{addr}] {msg}") 
+            print(f"[{addr}] {msg}") 
 
     conn.close()
 
