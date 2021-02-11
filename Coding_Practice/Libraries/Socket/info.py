@@ -27,3 +27,12 @@ Router communicates with each device on network through local ip addresses
 So if I run server on device connected to router, only devices in LAN can connect
 If its instead connected to modem, then all internet can see it 
 '''
+
+'''
+threading is a way to create multiple threads in one Python program
+Ex:
+    time.sleep(1)
+    print("hey")
+This would wait one second, and THEN print "hey"
+But if we ran them on separate threads, then we could print "hey" AND wait at same time
+'''
