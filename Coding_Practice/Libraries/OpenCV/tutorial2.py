@@ -8,7 +8,7 @@ Piero Orderique
 import cv2
 from random import randint
 #* openCV loads in image as numpy array!
-img = cv2.imread('assets/MIT_Dome.jpg', -1)
+img = cv2.imread('Detection/assets/MIT_Dome.jpg', -1)
 
 #* h, w, channels --- pic is actually rep by 3D array in BGR  (NOT RGB)
 print(img.shape)

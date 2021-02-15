@@ -8,7 +8,7 @@ def show_img(img):
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-img = cv2.imread('assets/MIT_Dome.jpg', -1)
+img = cv2.imread('Detection/assets/MIT_Dome.jpg', -1)
 height, width = img.shape[:2]
 center = (width//2, height//2)
 print("Width: {1}\nHeight: {0}\nCenter: {2}".format(height, width, center))

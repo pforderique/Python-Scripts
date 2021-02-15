@@ -12,7 +12,7 @@ import cv2
      0: grayscale
      1: loads as such including alpha channel
 '''
-img = cv2.imread('assets/MIT_Dome.jpg', 0)
+img = cv2.imread('Detection/assets/MIT_Dome.jpg', 0)
 
 ''' Resizing, rotating, etc '''
 #* Resize by pixel
@@ -25,7 +25,7 @@ img = cv2.resize(img, (0,0), fx=0.5, fy=0.5)
 # img = cv2.rotate(img, cv2.cv2.ROTATE_90_CLOCKWISE)
 
 #* WRITE IMAGE (save)
-cv2.imwrite('assets/new_img.png', img)
+cv2.imwrite('Detection/assets/new_img.png', img)
 
 '''
 load image in a window. Set window name as first arg
