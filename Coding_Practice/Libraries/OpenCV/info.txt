@@ -1,0 +1,7 @@
+'''
+OpenCV Python Tutorial
+Tech with Tim
+
+Piero Orderique
+Started: 15 Feb 2021
+'''
