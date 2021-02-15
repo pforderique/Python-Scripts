@@ -1,5 +1,8 @@
 '''
 Tutorial 1: Loading, editing, writing
+
+Piero Orderique
+15 Feb 2021
 '''
 
 import cv2
