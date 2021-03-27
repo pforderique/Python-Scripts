@@ -99,8 +99,8 @@ def mrna_to_protein(mrna):
     return protein
 
 
-print(dna_replication(dna_example))
-print(transcriptase(dna_example))
+# print(dna_replication(dna_example))
+# print(transcriptase(dna_example))
 print(mrna_to_protein(transcriptase(dna_example)))
 print(mrna_to_protein(transcriptase(newDNA)))
 

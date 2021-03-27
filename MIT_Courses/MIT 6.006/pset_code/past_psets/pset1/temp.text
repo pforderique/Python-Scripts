@@ -1,0 +1,25 @@
+    low = 0
+    high = len(arr) - 1
+
+    while(low < high):
+        print(low, mid, high, arr[mid])
+        mid = (high + low) // 2
+        if arr[mid] == d + mid:
+            low = mid + 1
+        else:
+            high = mid - 1
+
+        if low > high: 
+            break
+
+    return arr[mid] + d
+
+
+
+
+
+
+if __name__ == "__main__":
+    print(find_first_missing_element([1, 2, 3, 4, 5, 6], 1))
+    # print(find_first_missing_element([1,2,4,5], 1) )
+    # print(find_first_missing_element([], 3029319))
