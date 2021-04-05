@@ -1,100 +1,54 @@
 import unittest
-from solve_noolbs import solve_noolbs
+from pip_install import determine_install_order
 
 tests = (
     (
         (
-            ((1, 1, 0), (0, 0, 0), (0, "x", 0)),
+            [[1, 2], [], [1], [1]],
+        ),
+        3
+    ),
+    (
+        (
+            [[1], [2], [0]],
         ),
         None
     ),
     (
         (
-            ((1, 0, 0), (0, 0, 0), (0, "x", 0)),
+            [],
         ),
-        2
+        0
     ),
     (
         (
-            (
-                (1, 1, 0, 0),
-                (1, 0, 0, 2),
-                (0, 0, 0, 0),
-                (0, 0, 0, 0),
-                (0, 0, 0, 0),
-                (0, 0, "x", 0)
-            ),
+            [[] for i in range(10)],
         ),
-        13
+        1
     ),
     (
         (
-            (
-                (0, 1, 2, 1),
-                (1, 0, 0, 0),
-                (0, 0, 0, 0),
-                (0, 0, 0, 0),
-                (0, 0, 0, 0),
-                (0, 0, 0, 0),
-                (0, 0, "x", 0),
-            ),
-        ),
-        12
-    ),
-    (
-        (
-            (
-                (1, 2, 1, 1),
-                (1, 0, 1, 2),
-                (0, 0, 0, 0),
-                (0, 0, 0, 0),
-                (0, 0, 0, 0),
-                (0, 0, 0, 0),
-                (0, 0, "x", 0),
-            ),
+            [[i+1] for i in range(100)] + [[0]],
         ),
         None
     ),
     (
         (
-            (
-                (2, 1, 1, 0),
-                (3, 2, 1, 0),
-                (0, 0, 2, 0),
-                (0, 1, 0, 0),
-                (0, 0, 0, 0),
-                (0, 0, 0, 0),
-                (0, 0, 0, 0),
-                (0, 0, 0, 0),
-                (0, 0, 0, 0),
-                (0, 0, "x", 0),
-            ),
+            [[]] + [[i//2] for i in range(14)],
         ),
-        16
+        4
     ),
     (
         (
-            (
-                (1, 2, 3, 3),
-                (1, 3, 3, 2),
-                (0, 0, 0, 0),
-                (0, 3, 1, 1),
-                (0, 2, 0, 0),
-                (0, 0, 0, 0),
-                (0, 0, 0, 0),
-                (0, 0, 0, 0),
-                (0, 0, 0, 0),
-                (0, 0, "x", 0),
-            ),
+            [[], [0], [1, 6], [2], [3], [4], [5], [6], [7], [8], [9]],
         ),
         None
-    ),
+    )
 )
-
 
 def check(test):
     args, staff_sol = test
-    student_sol = solve_noolbs(*args)
+    student_sol = determine_install_order(*args)
     return staff_sol == student_sol
 
 
@@ -121,5 +75,5 @@ class TestCases(unittest.TestCase):
         self.assertTrue(check(tests[6]))
 
 
-if __name__ == "__main__":
-    res = unittest.main(verbosity=3, exit=False)
+if __name__ == '__main__':
+   res = unittest.main(verbosity = 3, exit = False)
