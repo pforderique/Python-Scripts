@@ -1,20 +1,18 @@
+import sys
+sys.setrecursionlimit(100000)
+
 def nestible(a:tuple, b:tuple):
     '''
     TRUE dimensions of box b can be nested inside of box a
     a,b are tuples of h,w,l
     '''
-    l_a,w_a,h_a = a
-    l_b,w_b,h_b = b
+    if len(a) == 2: #if we input the whole box instead of just the dimension tuple
+         a, b = a[0], b[0]
 
-    nestible = [
-        l_a > l_b and w_a > w_b and h_a > h_b,
-        l_a > l_b and w_a > h_b and h_a > w_b,
-        l_a > w_b and w_a > h_b and h_a > l_b,
-        l_a > w_b and w_a > l_b and h_a > h_b,
-        l_a > h_b and w_a > w_b and h_a > l_b,
-        l_a > h_b and w_a > l_b and h_a > w_b,
-    ]
-    return any(nestible)
+    a = sorted(a)
+    b = sorted(b)
+    
+    return a[0] > b[0] and a[1] > b[1] and a[2] > b[2]
 
 def mergeSort(myList) -> list:
     if len(myList) > 1:
@@ -63,16 +61,6 @@ def inator_destroyer(inators,incinerator_size):
         a list of tuples of the format (height,width,lenth) [allowed to be returned in any order] such that this subset of the boxes 
         can nest inside each other in the incinerator and evil potential is maximized
     """
-
-    inators = list(inators)
-
-    '''    
-    idx_incinerator = 0
-        for idx, box in enumerate(inators):
-        if box[1] is None: 
-            idx_incinerator = idx
-            # print(idx_incinerator)
-            break'''
     
     #* filter out those that are NOT nestible within our incinerator
     feasible_inators = []
@@ -80,14 +68,19 @@ def inator_destroyer(inators,incinerator_size):
         if nestible(incinerator_size, box[0]): 
             feasible_inators.append(box)
 
-    sorted_boxes = mergeSort(feasible_inators) # small to large
-    sorted_boxes.append(((1e7, 1e7, 1e7), 0))
+    # sorted_boxes = mergeSort(feasible_inators) # small to large
+    sorted_boxes = sorted(feasible_inators, key=lambda box: sorted(box[0]))
+
+    sorted_boxes.append(((float('inf'), float('inf'), float('inf')), 0))
     sorted_boxes.reverse() # largest to smallest
 
     n = len(sorted_boxes)
 
     parent = dict()
+    included = dict()
     best_inators = []
+
+    memo = dict()
 
     def T(i:int,j:int) -> int:
         '''
@@ -104,49 +97,69 @@ def inator_destroyer(inators,incinerator_size):
             # base case
             if i == n-1:
                 if nestible(j_size, i_size): 
+                    # best_inators.append(sorted_boxes[n-1][0])
                     parent[(i,j)] = None
-                    best_inators.append(sorted_boxes[n-1][0])
+                    included[(i,j)] = 1
                     return sorted_boxes[n-1][1]
                 else:
                     parent[(i,j)] = None
+                    included[(i,j)] = 0
                     return 0
 
-            if nestible(j_size, i_size):
-                opt1 = T(i+1,j)
-                opt2 = e_i + T(i+1, i)
+            elif nestible(j_size, i_size):
+                if (i+1,j) in memo: 
+                    opt1 = memo[(i+1,j)] 
+                else: 
+                    opt1 = T(i+1,j)
+                    memo[(i+1,j)] = opt1
+
+                if (i+1, i) in memo: 
+                    opt2 = memo[(i+1, i)]
+                else: 
+                    opt2 = e_i + T(i+1, i)
+                    memo[(i+1, i)] = opt2
+                
                 max_ =  max( opt1, opt2 )
 
                 if max_ == opt1: 
                     parent[(i,j)] = (i+1,j)
+                    included[(i,j)] = 0
                 elif max_ == opt2: 
-                    best_inators.append(sorted_boxes[i][0])
+                    # best_inators.append(sorted_boxes[i][0])
                     parent[(i,j)] = (i+1, i)
+                    included[(i,j)] = 1
 
                 return max_
 
             else:
                 parent[(i,j)] = (i+1,j)
-                return T(i+1,j)
-        
+                included[(i,j)] = 0
+
+                if (i+1,j) in memo: 
+                    return memo[(i+1,j)]
+                else: 
+                    t = T(i+1,j)
+                    memo[(i+1,j)] = t
+                    return t
+    
         else:
-            parent[(i,j)] = None
-            return 0
+            return None
 
     ans = T(1,0)
-    print(f'\n{ans}')
+    # print(f'\n{ans}')
+
+    if ans is None: return []
 
     best_inators = []
-    curr = (1,0)
+    curr = (1,0) #* (i,j)
     while curr: 
-        print(f"curr = {curr}")
+        # print(f"curr = {curr}")
+
         parent_box_size = sorted_boxes[curr[0]][0]
-        best_inators.append(parent_box_size)
+        if included[curr]:
+            best_inators.append(parent_box_size)
 
         curr = parent[curr]
 
-    print(set(best_inators))
-
-    return set(best_inators)
-
-
-    
+    # print(set(best_inators))
+    return list(set((best_inators)))

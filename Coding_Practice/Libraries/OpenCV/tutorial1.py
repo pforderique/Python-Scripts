@@ -25,7 +25,7 @@ img = cv2.resize(img, (0,0), fx=0.5, fy=0.5)
 # img = cv2.rotate(img, cv2.cv2.ROTATE_90_CLOCKWISE)
 
 #* WRITE IMAGE (save)
-cv2.imwrite('Detection/assets/new_img.png', img)
+cv2.imwrite('Detection/assets/BW_MIT_Dome.png', img)
 
 '''
 load image in a window. Set window name as first arg
