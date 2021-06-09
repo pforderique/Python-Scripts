@@ -24,7 +24,7 @@ while True:
     #* draw rect
     img = cv2.rectangle(img, (100,100), (200,200), (128,128,128), -1) # if negative, it FILLS the shape
 
-    #* draw rect
+    #* draw circle
     img = cv2.circle(img, (width//2,height//2), 30, (0,0,255), 10) # if negative, it FILLS the shape
 
     #* draw text
