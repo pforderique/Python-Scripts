@@ -102,6 +102,67 @@ class Solution:
         setA, setB = set(nums1), set(nums2)
         return list(setA.intersection(setB))
 
+    def partitionLabels(self, s: str):
+        '''
+        DP is wrong -- try greedy approach
+        '''
+        n = len(s)
+
+        # DP approach -- overkill and wrong
+        def DP(i:int, seen:set, curr:set):
+            # base case
+            if i >= n: 
+                print(f"INDEX {i}: base case... returned 0 var: {seen}, {curr}")
+                return 0
+
+            # if we've seen it in this current partition, we HAVE to take it
+            if s[i] in curr:
+                print(f"INDEX {i}: {s[i]} IN CURR so we take it... -- vars: {seen}, {curr}")
+                return DP(i+1, seen, curr)
+            
+            # ELIF not in curr but IS in SEEN, then this solution is invalid
+            elif s[i] in seen:
+                print(f"INDEX {i}: {s[i]} NOT in curr but we've SEEN it before... reutrn -INF-- var: {seen}, {curr}")
+                return -float('inf')
+            
+            # ELSE its a new char... take it or leave it for next partition
+            else:
+                seen.add(s[i])
+
+                # take it in this partition
+                curr.add(s[i])
+                opt1 = DP(i+1, seen, curr) 
+
+                # give it to the next partition
+                curr.clear()
+                curr.add(s[i])
+                opt2 = 1 + DP(i+1, seen, curr)
+
+                if opt1 > opt2: print(f"INDEX {i}: taking {s[i]} -- var: {seen}, {curr}")
+                else: print(f"INDEX {i}: leaving {s[i]} for new partition-- var: {seen}, {curr}")
+
+                return max(opt1, opt2)
+
+        #* Greedy Approach -- correct!:
+
+        # keep track of last occurence of that character
+        last_seen = {c:i for i,c in enumerate(s)}
+
+        # track anchor and final index of partition
+        anchor = j = 0
+        ans = []
+
+        # now iterate through and increase partition as necessary
+        for i, c in enumerate(s):
+            j = max(j, last_seen[c])
+
+            # if we reached end of partition, shift anchor over
+            if i == j:
+                ans.append(j - anchor + 1)
+                anchor = i + 1
+
+        return ans
+
 if __name__ == "__main__":
     sol = Solution()
     # past testing:
@@ -112,5 +173,10 @@ if __name__ == "__main__":
         # print(sol.maxProduct([1,5,4,5]))
         # print(sol.countNegatives([[4,3,2,-1],[3,2,1,-1],[1,1,-1,-2],[-1,-1,-2,-3]]))
         # print(sol.sortArrayByParity([3,1,2,4]))
+        # print(sol.minWindow("A", "T"))
     import time
-    print(sol.minWindow("A", "T"))
+    start = time.time()
+
+    print(sol.partitionLabels("ababcbacadefegdehijhklij"))
+
+    print(f"Time Taken: {time.time() - start}")
