@@ -163,6 +163,47 @@ class Solution:
 
         return ans
 
+    def rotate(self, matrix) -> None:
+        start, end = 0, len(matrix)
+        t1, t2, = [], []
+        
+        while end - start > 1: #  while there is more than 1 element in a row/col
+
+            # rotate the corners:
+            matrix[start][end-1], matrix[end-1][end-1], matrix[end-1][start], matrix[start][start] = (
+                matrix[start][start], matrix[start][end-1], matrix[end-1][end-1], matrix[end-1][start])
+            
+            # if its only a 2x2 matrix, youre done
+            if end - start == 2:
+                break
+                
+            # else rotate outter edges with O(1) space
+            
+            # rotate top row -> right col
+            for i in range(end-2, start, -1):
+                t1.append(matrix[i][end-1])
+                matrix[i][end-1] = matrix[start][i]
+                
+            # rotate right col -> bottom row
+            for i in range(end-2, start, -1):
+                t2.append(matrix[end-1][i])
+                matrix[end-1][i] = t1.pop()
+            
+            # rotate bottom row -> left col
+            for i in range(start+1, end-1):
+                t1.append(matrix[i][start])
+                matrix[i][0] = t2.pop()
+            
+            # rotate left col -> top row
+            for i in range(start+1, end-1):
+                matrix[start][i] = t1.pop()
+                
+            # reduce the size of matrix to work on
+            start += 1
+            end -= 1
+                
+        return
+
 if __name__ == "__main__":
     sol = Solution()
     # past testing:
@@ -174,9 +215,18 @@ if __name__ == "__main__":
         # print(sol.countNegatives([[4,3,2,-1],[3,2,1,-1],[1,1,-1,-2],[-1,-1,-2,-3]]))
         # print(sol.sortArrayByParity([3,1,2,4]))
         # print(sol.minWindow("A", "T"))
+        # print(sol.partitionLabels("ababcbacadefegdehijhklij"))
     import time
     start = time.time()
 
-    print(sol.partitionLabels("ababcbacadefegdehijhklij"))
+    data = [[ 1, 2, 3, 4, 5],
+            [ 6, 7, 8, 9,10],
+            [11,12,13,14,15],
+            [16,17,18,19,20],
+            [21,22,23,24,25]]
+
+    sol.rotate(data)
+    print('=== final: ===')
+    for d in data: print(d)
 
     print(f"Time Taken: {time.time() - start}")
