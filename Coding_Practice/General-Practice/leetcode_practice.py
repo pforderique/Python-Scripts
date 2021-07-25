@@ -204,8 +204,33 @@ class Solution:
                 
         return
 
+    def findKthLargest(self, nums, k):
+        import heapq
+
+        # add first k to min heap
+        minHeap = nums[:k]
+
+        heapq.heapify(minHeap)
+
+        for i in range(k, len(nums)):
+            # if current number is greater than the min in heap
+            if nums[i] > minHeap[0]:
+                # replace root/min element
+                heapq.heappushpop(minHeap, nums[i])
+                heapq.heapify(minHeap)
+
+        # return the smallest of the largest k
+        return heapq.heappop(minHeap)
+
+
 if __name__ == "__main__":
     sol = Solution()
+    # past data:
+        # data = [[ 1, 2, 3, 4, 5],
+        #     [ 6, 7, 8, 9,10],
+        #     [11,12,13,14,15],
+        #     [16,17,18,19,20],
+        #     [21,22,23,24,25]]
     # past testing:
         # print(sol.findNumbers([12,345,2,6,7896]))
         # print(sol.minTimeToVisitAllPoints([[1,1],[3,4],[-1,0]]))
@@ -216,17 +241,11 @@ if __name__ == "__main__":
         # print(sol.sortArrayByParity([3,1,2,4]))
         # print(sol.minWindow("A", "T"))
         # print(sol.partitionLabels("ababcbacadefegdehijhklij"))
+    
     import time
     start = time.time()
 
-    data = [[ 1, 2, 3, 4, 5],
-            [ 6, 7, 8, 9,10],
-            [11,12,13,14,15],
-            [16,17,18,19,20],
-            [21,22,23,24,25]]
-
-    sol.rotate(data)
-    print('=== final: ===')
-    for d in data: print(d)
+    data = [3,2,3,1,2,4,5,5,6]
+    print(sol.findKthLargest(data, 4))
 
     print(f"Time Taken: {time.time() - start}")
