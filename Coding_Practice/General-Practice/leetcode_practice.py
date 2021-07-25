@@ -231,6 +231,7 @@ if __name__ == "__main__":
         #     [11,12,13,14,15],
         #     [16,17,18,19,20],
         #     [21,22,23,24,25]]
+        # data = [3,2,3,1,2,4,5,5,6]
     # past testing:
         # print(sol.findNumbers([12,345,2,6,7896]))
         # print(sol.minTimeToVisitAllPoints([[1,1],[3,4],[-1,0]]))
@@ -245,7 +246,5 @@ if __name__ == "__main__":
     import time
     start = time.time()
 
-    data = [3,2,3,1,2,4,5,5,6]
-    print(sol.findKthLargest(data, 4))
 
     print(f"Time Taken: {time.time() - start}")
